@@ -1,0 +1,159 @@
+# -------------------
+# Merritt Burch
+# mbb262@cornell.edu
+# 2019-07-01
+# -------------------
+
+# README for testing PHG using small seq simulated data.
+#
+# Goal:
+# Build a PHG DB and produce a VCF file for all the lines in Genotyping Fastq.
+#
+# Wiki: https://bitbucket.org/bucklerlab/practicalhaplotypegraph/wiki/Home
+#
+# Please submit feedback on pangenomegraph channel in a text file.
+#
+# You will first need to install docker and pull down the phg:
+#
+# The steps you will need to run are the following:
+#         LoadGenomeIntervals.sh
+#         CreateHaplotypes
+#         CreateConsensi.sh
+# 
+#         IndexPangeome.sh
+#         FindPathMinimap2.sh
+#         ExportPath.sh
+# 
+# The fastq Files in WGSFastq will be used for CreateHaplotypes.  The fastqs in Genotyping Fastq will be used in FindPathMinimap2.sh
+
+# --------------
+# Notes to self
+# --------------
+
+# 1. Find/familiarize self with files
+# 	/GenontypingFastq = files to run against built PHG
+# 	/WGSFastq = files to build PHG with
+# 	copy all files to home directory
+
+cp -r /data1/users/zrm22/PHGDocumentationTest/ /mbb262/home/
+
+
+# 2. Build a Docker (from a CBSU machine)
+docker1 pull maizegenetics/phg
+
+# 3. Docker Pipeline Phase 1
+#	CreateReferenceIntervals.sh --> already ran, interval file is in provided directory
+
+# 4. Docker Pipeline Phase 1
+#	LoadGenomeIntervals.sh
+#	copy and paste LoadGenomeIntervals.sh script into a text editor
+#	change all instances of "/workdir/user/DockerTuningTests/" to mbb262
+#	Don't change anything after the colon, those are for docker
+#	copy files over to a cbsu machine
+
+cp -r /home/mbb262/PHGDocumentationTest/ ./
+docker1 run --name load_phg_container --rm \
+        -v /workdir/mbb262/PHGDocumentationTest/DockerOutput/:/tempFileDir/outputDir/ \
+        -v /workdir/mbb262/PHGDocumentationTest/ref/:/tempFileDir/data/reference/ \
+        -v /workdir/mbb262/PHGDocumentationTest/:/tempFileDir/data/ \
+        -v /workdir/mbb262/PHGDocumentationTest/:/tempFileDir/answer/ \
+        -t maizegenetics/phg:latest \
+        /LoadGenomeIntervals.sh configSQLiteDocker.txt Ref.fa intervals.bed load_data.txt true
+
+# 5. Docker Pipeline Phase 1
+#	Can skip LoadAssemblyAnchors.sh
+#	CreateHaplotypes
+
+Pipeline Steps
+Check to see if the reference is BWA and fai indexed
+If not index using bwa, samtools and picard
+Align WGS fastqs to the reference using bwa men
+Sort and MarkDuplicates in the output BAM file
+Filter the BAM file based on Minimum MapQ
+Run HaplotypeCaller using GATK or Sentieon
+Filter the GVCF file
+Extract out the Reference Ranges and load the haplotypes to the DB
+
+
+#	LoadAssemblyAnchors.sh
+
+# --------------
+# Notes to Zack
+# --------------
+
+General confusion:
+Unclear as to where we should be downloading a docker image, is onto our home directory alright or should it be in the working directory?
+
+
+# --------------------------
+# CreateRefereceIntervals.sh
+# --------------------------
+
+Clarification needed: Users don't have to run CreateRefereceIntervals.sh because interval file is in the directory.
+
+
+# -----------------------
+# LoadGenomeIntervals.sh
+# -----------------------
+
+Clarifications:
+
+Do we need to create the DockerOutput directory? (resolved --> it's made when you run the command)
+
+I would suggest that the LoadGenomeIntervals.sh script be "pre-made" with a directory structure that can be based off of Zack's initial file structure (/data1/users/zrm22/PHGDocumentationTest/) so that the test examples can flow a bit easier or use a more simplified format (${}).
+
+Where do the config.txt and B73Ref_load_data.txt files come from? (resolved --> they are exactly the same as the example one on Bitbucket)
+
+Annotation for what each line in LoadGenomesIntervals.sh needs is well written but out of order for each line. Would suggest reordering it for clarity.
+
+Got an error (resolved): --> redownloaded docker in workdir, "docker" in script should be "docker1" or else you get an error (if running on cbsu)
+
+Error (resolved) --> changed second to last line to 
+-t maizegenetics/phg:latest \
+
+Maybe add the genome data file to the PHGDocumentationTest directory for easier use/access?
+
+
+# ----------------
+# CreateHaplotypes
+# ----------------
+
+Clarifications:
+
+An example script with a bit more detail would be realy nice to have here.
+
+bwa-mem is misspelt in the "pipeline steps" (its bwa-men now)
+https://bitbucket.org/bucklerlab/practicalhaplotypegraph/wiki/DockerPipeline/CreateHaplotypesFromFastq
+
+It might also be helpful to note on the CreateHaplotypesFromFastq Wiki that the Pipeline steps are all built into groovy, there is no need to do each one of those steps separately. 
+
+Do we have to save the CreateHaplotypesFromFastq.groovy to our working directories? (resolved: it's in docker already, we just need more clear code (like for LoadGenomeIntervals.sh) to see how to call docker and mount files) --> (mostly resolved)
+
+Seeing a script/example on how to run a loop for all taxon would be great. I just copied and pasted the command a bunch of times for all the fastq files in WGSFastq (resolved --> the looping script is great! Users just have to pay attention to weird file names (i.e. _R1))
+
+I like the new format of sample scripts in the CreateHaplotypesFromFastq Wiki (with the ${} shortcuts) rather than the LoadGenomeIntervals.sh wiki, it's easier to follow and see what files are going where. 
+
+Hard to tell when this step is complete if everything went successfully, it might be helpful for each of these steps to describe what non-error outputs and error ouputs look like. 
+
+
+# ------------------
+# CreateConsensi.sh
+# ------------------
+
+In example code I think the phgrepository_test:latest is supposed to be maizegenetics/phg
+
+# ----------------
+# FindPathMinimap2
+# ----------------
+
+-t phgrepository_test:latest \ should be the maizegenetics one (resolved)
+
+Is it supposed to be maizegenetics/phg:latest or maizegenetics/phg? In the last few scripts/stepss I have just been using maizegenetics/phg and it seemed to work. Some of the earlier scripts on the Wiki (I think) had only the maizegenetics/phg
+
+
+# -----------
+# ExportPath
+# -----------
+
+ -t phgrepository_test:latest \ is supposed to be the maize one
+
