@@ -60,7 +60,7 @@ zhang_allModels <- merge(x = zhang, y = gene_model_xref_v3,
                          by.x = "gene", by.y = "v1_gene_model")
 
 # Subset out columns
-zhang_allModels <- zhang_allModels[,c(14,3,2,5,4)]
+zhang_allModels <- zhang_allModels[,c(14,3,2,5,4,12)]
 
 # Merge my genes with gff annotations from v4
 zhang_gene_coords <- merge(x = zhang_allModels, y = maize_gff,
@@ -70,26 +70,27 @@ zhang_gene_coords <- merge(x = zhang_allModels, y = maize_gff,
 # Get data
 dong_genes_with_coordinates <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/ames_tests/Sep25_localPCs/dong_genes_with_coordinates.csv", header = TRUE)
 
-# Rearrange my data
-zhang_gene_coords <- zhang_gene_coords[,c(1,4,6,9,10,5,3,14)]
-dong_genes_with_coordinates <- dong_genes_with_coordinates[,c(8,7,9,10,11,1:4,6,12)]
-
 # Fill out missing gaps between datasets
 dong_genes_with_coordinates$Paper <- rep("dong_2012", nrow(dong_genes_with_coordinates))
 dong_genes_with_coordinates$trait <- rep("flowering_time", nrow(dong_genes_with_coordinates))
 zhang_gene_coords$pathway <- rep(NA, nrow(zhang_gene_coords))
-zhang_gene_coords$zm_gene <- rep(NA, nrow(zhang_gene_coords))
+# zhang_gene_coords$zm_gene <- rep(NA, nrow(zhang_gene_coords))
 zhang_gene_coords$at_gene <- rep(NA, nrow(zhang_gene_coords))
 zhang_gene_coords$tissues_expressed <- rep(NA, nrow(zhang_gene_coords))
 zhang_gene_coords$genbank_accession <- rep(NA, nrow(zhang_gene_coords))
 
-# Rearrange
-zhang_gene_coords <- zhang_gene_coords[,c(1:7,9:13,8)]
-dong_genes_with_coordinates <- dong_genes_with_coordinates[,c(1:5,12:13,6:10,11)]
+# Rearrange my data
+zhang_gene_coords <- zhang_gene_coords[,c(1,4,7,6,10,11,3,5,17,18,19,15)]
+dong_genes_with_coordinates <- dong_genes_with_coordinates[,c("v4_assoc_gene_model","v3_assoc_gene_model","seqid",
+                                                              "zm_gene","start","end","trait","Paper",
+                                                              "at_gene","tissues_expressed","genbank_accession",
+                                                              "attributes")]
+# Make colnames consistent
 colnames(dong_genes_with_coordinates) <- colnames(zhang_gene_coords)
 
 # Combine
 prior_genes <- rbind(dong_genes_with_coordinates, zhang_gene_coords)
 
-
+# Write file
+write.csv(prior_genes, "verified_genes_traits.csv", quote = F, row.names = F)
 
