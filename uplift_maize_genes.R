@@ -22,10 +22,10 @@ library(ape)
 
 # Load in Dong 2012 genes formatted from
 # https://bitbucket.org/bucklerlab/askdb_cis_trans/src/master/data/flowering_genes_dong.csv
-dong <- read.csv("flowering_genes_dong.csv", header = TRUE)
+dong <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/flowering_genes_dong.csv", header = TRUE)
 
 # Read gff file
-maize_gff <- ape::read.gff("~/Box\ Sync/Cornell_PhD/labProjects/hap_gwa/ames_tests/Sep25_localPCs/Zea_mays.B73_RefGen_v4.45.gff3" , na.strings = c(".", "?"), GFF3 = TRUE)
+maize_gff <- ape::read.gff("~/Box\ Sync/Cornell_PhD/labProjects/hap_gwa/data/maize_v4_annotations/Zea_mays.B73_RefGen_v4.45.gff3" , na.strings = c(".", "?"), GFF3 = TRUE)
 
 # Do some formatting to isolate gene names
 maize_gff <- maize_gff[which(maize_gff$type == "gene"),]
@@ -50,7 +50,7 @@ write.csv(dong_coordinates, "dong_genes_with_coordinates.csv", row.names = F, qu
 # -------------------------------------
 
 # Read in file
-zhang <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/Zhang2014_metabolism_priors.csv")
+zhang <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/Zhang2014_metabolism_priors.csv")
 
 # Read in gene model association file (conversion file) and do formatting
 gene_model_xref_v3 <- read.delim("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/maize_v4_annotations/gene_model_xref_v3.txt")
@@ -68,7 +68,7 @@ zhang_gene_coords <- merge(x = zhang_allModels, y = maize_gff,
 
 # Merge with dong flowering time loci
 # Get data
-dong_genes_with_coordinates <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/ames_tests/Sep25_localPCs/dong_genes_with_coordinates.csv", header = TRUE)
+dong_genes_with_coordinates <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/dong_genes_with_coordinates.csv", header = TRUE)
 
 # Fill out missing gaps between datasets
 dong_genes_with_coordinates$Paper <- rep("dong_2012", nrow(dong_genes_with_coordinates))
@@ -91,6 +91,47 @@ colnames(dong_genes_with_coordinates) <- colnames(zhang_gene_coords)
 # Combine
 prior_genes <- rbind(dong_genes_with_coordinates, zhang_gene_coords)
 
+# Add Brown 2011 genes and Kump 2011 genes
+brown <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/brown2011_loci.csv")
+kump <- read.csv("~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/kump2011_gwas_verification_loci.csv")
+
+# Merge my genes with gff annotations from v4
+brown_gene_coords <- merge(x = brown, y = maize_gff,
+                           by.x = "gene", by.y = "gene")
+
+# Merge my genes with gff annotations from v4
+kump_gene_coords <- merge(x = kump, y = gene_model_xref_v3,
+                           by.x = "closest_gene", by.y = "v1_gene_model")
+kump_gene_coords <- merge(x = kump_gene_coords, y = maize_gff,
+                          by.x = "v4_gene_model", by.y = "gene")
+
+# Put in missing columns
+brown_gene_coords$v3_gene_model <- rep(NA, nrow(brown_gene_coords))
+brown_gene_coords$at_gene <- rep(NA, nrow(brown_gene_coords))
+brown_gene_coords$tissues_expressed <- rep(NA, nrow(brown_gene_coords))
+brown_gene_coords$genbank_accession<- rep(NA, nrow(brown_gene_coords))
+kump_gene_coords$at_gene <- rep(NA, nrow(kump_gene_coords))
+kump_gene_coords$tissues_expressed <- rep(NA, nrow(kump_gene_coords))
+kump_gene_coords$genbank_accession <- rep(NA, nrow(kump_gene_coords))
+
+# Rearramge
+brown_gene_coords <- brown_gene_coords[,c("gene", "v3_gene_model", "seqid", "abbreviation", "start",
+                                          "end", "trait", "paper","at_gene","tissues_expressed",
+                                          "genbank_accession", "attributes" )]
+kump_gene_coords <- kump_gene_coords[,c("v4_gene_model","v3_gene_model","seqid","v3_locus","start",
+                                        "end", "trait", "paper","at_gene","tissues_expressed",
+                                        "genbank_accession", "attributes")]
+
+# Change column names
+colnames(brown_gene_coords) <- colnames(prior_genes)
+colnames(kump_gene_coords) <- colnames(prior_genes)
+
+# Merge
+prior_genes <- rbind(prior_genes, brown_gene_coords, kump_gene_coords)
+
 # Write file
-write.csv(prior_genes, "verified_genes_traits.csv", quote = F, row.names = F)
+write.csv(prior_genes, "~/Box Sync/Cornell_PhD/labProjects/hap_gwa/data/verification_loci/verified_genes_traits.csv", 
+          quote = T, row.names = F)
+
+
 
