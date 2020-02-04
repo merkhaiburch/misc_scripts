@@ -1,0 +1,43 @@
+#database config parameters
+host=localHost
+user=sqlite
+password=sqlite
+DB=/workdir/phg_v5Assemblies.db
+DBtype=sqlite
+
+#Java arguments
+Xmx=200G
+#Hello my name is Evan
+#CreateHaplotype Params
+referenceFasta=/path/to/reference/ref.fasta
+LoadHaplotypesFromGVCFPlugin.keyFile=/path/to/keyfile/keyFile.txt
+LoadHaplotypesFromGVCFPlugin.gvcfDir=/path/to/gvcfs/
+LoadHaplotypesFromGVCFPlugin.referenceFasta=/path/to/reference/ref.fasta
+LoadHaplotypesFromGVCFPlugin.haplotypeMethodName=GATK_PIPELINE
+LoadHaplotypesFromGVCFPlugin.haplotypeMethodDescription=GVCF_DESCRIPTION
+
+#Haplotype filtering
+mapQ=48
+DP_poisson_min=.01
+DP_poisson_max=.99
+GQ_min=50
+filterHets=t
+
+#sentieon license
+sentieon_license=cbsulogin2.tc.cornell.edu:8990
+
+#Consensus parameters
+#Optional argument to get out merged VCF files for debugging consensus
+includeVariants=true
+mxDiv=.001
+maxError=0.2
+
+#FindPath Config parameters
+maxNodesPerRange=30
+minTaxaPerRange=1
+minReads=1
+maxReadsPerKB=100
+minTransitionProb=0.001
+probReadMappedCorrectly=0.99
+emissionMethod=allCounts
+splitTaxa=false
