@@ -9,7 +9,7 @@
 # ---------------------------------------------------------------
 
 # Set workdir
-setwd("~/Box Sync/Cornell_PhD/labProjects/hackathons/2020_02_03_hackathon")
+setwd("~/Box Sync/Cornell_PhD/labProjects/hackathons/2020_02_03_hackathon/data")
 
 # Libraries
 library(ggplot2)
@@ -49,6 +49,138 @@ temp <- genic %>%
   group_by(ref_range_id) %>%
   summarise(mean = mean(seq_len), min = min(seq_len), max = max(seq_len), n = n())
 
+# Load in count data
+consen_count_0.01 <- read.table("Consensus_counts_0.01.txt", header = FALSE, sep = "|", col.names = c("ref_range", "haplotype_count"))
+consen_count_0.005 <- read.table("Consensus_counts_0.005.txt", header = FALSE, sep = "|", col.names = c("ref_range", "haplotype_count"))
+consen_count_0.001 <- read.table("Consensus_counts_0.001.txt", header = FALSE, sep = ",", col.names = c("ref_range", "haplotype_count"))
+consen_count_0.0005 <- read.table("Consensus_counts_0.0005.txt", header = FALSE, sep = "|", col.names = c("ref_range", "haplotype_count"))
+consen_count_0.0001 <- read.table("Consensus_counts_0.0001.txt", header = FALSE, sep = ",", col.names = c("ref_range", "haplotype_count"))
+
+consen_count_0.01$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_count_0.005$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_count_0.001$annotation <-  c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_count_0.0005$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_count_0.0001$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+
+consen_count_0.01$method <- rep("maxdiv_0.01", nrow(consen_count_0.01))
+consen_count_0.005$method <- rep("maxdiv_0.005", nrow(consen_count_0.005))
+consen_count_0.001$method <- rep("maxdiv_0.001", nrow(consen_count_0.001))
+consen_count_0.0005$method <- rep("maxdiv_0.0005", nrow(consen_count_0.0005))
+consen_count_0.0001$method <- rep("maxdiv_0.0001", nrow(consen_count_0.0001))
+
+# Consen count
+all_consen_count <- rbind(consen_count_0.0001, consen_count_0.0005, consen_count_0.001, consen_count_0.005, consen_count_0.01)
+
+# Plot consen count by genic and intergenic
+ggplot(all_consen_count, aes(x = method, y = haplotype_count, fill = annotation)) + 
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.title = element_blank(),
+        text = element_text(size=20)) +
+  labs(x="level of maxDiv collapsing", y = "Number of haplotypes per ref-range") +
+  facet_wrap(~annotation, nrow = 2)+ guides(fill=FALSE)
+
+# Plot consen count for both genic and intergenic
+ggplot(all_consen_count, aes(x = method, y = haplotype_count)) + 
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.title = element_blank(),
+        text = element_text(size=20)) +
+  labs(x="level of maxDiv collapsing", y = "Number of haplotypes per ref-range")
+
+# Ref ranges 
+ref <- read.table("reference_ranges.txt", header = F, sep = ",", col.names = c("ref_range", "chrom", "start", "end"))
+
+temp <- merge(x = ref, y= consen_count_0.001, by = "ref_range")
+temp <- temp[temp$annotation == "genic",]
+# temp$range_len <- temp$end-temp$start
+# temp <- temp[temp$chrom==1,]
+ggplot(temp, aes(x = start, y = haplotype_count)) + 
+  geom_point(aes(colour = factor(annotation))) +
+  theme(legend.title = element_blank(),
+        text = element_text(size=15)) +
+  labs(x="Start Position of Reference Range", y = "Number of haplotypes per ref-range") +
+  facet_wrap(~chrom, nrow = 10) +
+  guides(fill=FALSE)
+
+# Investigate blank spot on chr5, dominated by large intergenic haplotypes
+# temp <- temp[which(temp$start > 199000000 & temp$start < 203500000 & temp$chrom == 5), ]
+
+# Make a statistics table
+
+temp <- merge(x = ref, y= consen_count_0.001, by = "ref_range")
+# temp <- temp[temp$annotation == "genic",]
+# temp <- temp[which(temp$start > 124680523 & temp$start < 136656761 & temp$chrom == 8), ]
+temp <- temp[which(temp$start > 135576768 & temp$start < 135656761 & temp$chrom == 8), ]
+
+#CCN8, 135653000-135657000
+Rap2.7:135653893 - 135656761
+
+ZCN8: 126680523 - 126678665
+# temp$range_len <- temp$end-temp$start
+# temp <- temp[temp$chrom==1,]
+ggplot(temp, aes(x = start, y = haplotype_count)) + 
+  geom_point(aes(colour = factor(annotation))) +
+  theme(legend.title = element_blank(),
+        text = element_text(size=15)) +
+  labs(x="Start Position of Reference Range", 
+       y = "Number of haplotypes per ref-range") +
+  ggtitle("Rap2.7 and ZCN8 on Chr 8") +
+  facet_wrap(~chrom, nrow = 10) +
+  guides(fill=FALSE)
+
+#  su1 locus
+# 43430142-43438931
+temp <- merge(x = ref, y= consen_count_0.001, by = "ref_range")
+su1 <- temp[which(temp$start > 41430142 & temp$start < 45438931 & temp$chrom == 4), ]
+su1 <- temp[which(temp$start > 43330142 & temp$start < 43538931 & temp$chrom == 4), ]
+
+ggplot(su1, aes(x = start, y = haplotype_count)) + 
+  geom_point(aes(colour = factor(annotation))) +
+  theme(legend.title = element_blank(),
+        text = element_text(size=15)) +
+  labs(x="Start Position of Reference Range", 
+       y = "Number of haplotypes per ref-range") +
+  ggtitle("su1 - sugary1")
+
+haps <- read.table("ConsensusHapData_001.txt", header = T)
+su_haps <- haps[which(haps$chr==4 & haps$start > 43330142 & haps$start < 43538931),]
+
+
+# -----------------------
+# Load in haplotype info
+# -----------------------
+
+consen_hap_0.01 <- read.table("Consensus_haplotypes_0.01.txt", header = FALSE, sep = ",", col.names = c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len"))
+consen_hap_0.005 <- read.table("Consensus_haplotypes_0.005.txt", header = FALSE, sep = ",", col.names = c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len"))
+consen_hap_0.001 <- read.table("Consensus_haplotypes_0.001.txt", header = FALSE, sep = ",", col.names = c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len"))
+consen_hap_0.0005 <- read.table("Consensus_haplotypes_0.0005.txt", header = FALSE, sep = ",", col.names = c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len"))
+consen_hap_0.0001 <- read.table("Consensus_haplotypes_0.0001.txt", header = FALSE, sep = ",", col.names = c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len"))
+
+consen_hap_0.01$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_hap_0.005$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_hap_0.001$annotation <-  c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_hap_0.0005$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+consen_hap_0.0001$annotation <- c(rep("genic", (70754/2)-1), rep("intergenic", 70754/2))
+
+consen_hap_0.01$method <- rep("maxdiv_0.01", nrow(consen_hap_0.01))
+consen_hap_0.005$method <- rep("maxdiv_0.005", nrow(consen_hap_0.005))
+consen_hap_0.001$method <- rep("maxdiv_0.001", nrow(consen_hap_0.001))
+consen_hap_0.0005$method <- rep("maxdiv_0.0005", nrow(consen_hap_0.0005))
+consen_hap_0.0001$method <- rep("maxdiv_0.0001", nrow(consen_hap_0.0001))
+
+
+
+
+
+
+
+temp <- consen_count_0.001
+temp <- temp[temp$haplotype < 35377, ]
+temp <- temp[temp$haplotype < 7000, ]
+ggplot(temp, aes(x = haplotype, y = count)) + 
+  geom_point()
+
 
 # -----------------------
 # Uncollapsed haplotypes
@@ -59,6 +191,7 @@ hap <- read.table("cintaMap.txt", header = T) # Lynn generated
 
 # Melt data 
 library(reshape)
+hap$collapse_level <- rep("uncollapsed", nrow(hap))
 hap$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2)) # annotation
 mdata <- melt(hap, id=c("refRangeID","chr","start","end", "annotation"))
 
@@ -73,4 +206,55 @@ ggplot(mdata, aes(x = variable, y = log10(value), fill = annotation)) +
         text = element_text(size=20)) +
   labs(x="Taxa", y = "log10(haplotype length)") +
   facet_wrap(~annotation, nrow = 2)+ guides(fill=FALSE)
+
+
+# ----------------------
+# Collapsed haplotypes
+# ----------------------
+
+# Load in other levels of collapsed haplotypes
+# 0.0001, 0.0005, 0.001, 0.005, 0.01
+maxdiv_0.0001 <- read.table(, header = TRUE)
+maxdiv_0.0005 <- read.table(, header = TRUE)
+maxdiv_0.001 <- read.table(, header = TRUE)
+maxdiv_0.005 <- read.table(, header = TRUE)
+maxdiv_0.01 <- read.table(, header = TRUE)
+
+# Add collapsing type
+maxdiv_0.0001$collapse_level <- rep("maxdiv_0.0001", nrow(maxdiv_0.0001))
+maxdiv_0.0005$collapse_level <- rep("maxdiv_0.0005", nrow(maxdiv_0.0005))
+maxdiv_0.001$collapse_level <- rep("maxdiv_0.001", nrow(maxdiv_0.001))
+maxdiv_0.005$collapse_level <- rep("maxdiv_0.005", nrow(maxdiv_0.005))
+maxdiv_0.01$collapse_level <- rep("maxdiv_0.01", nrow(maxdiv_0.01))
+
+# Add genic or intergenic flag
+maxdiv_0.0001$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+maxdiv_0.0005$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+maxdiv_0.001$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+maxdiv_0.005$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+maxdiv_0.01$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+
+# Combine dataframes
+all_collapsed <- rbind(hap, maxdiv_0.0001, maxdiv_0.0005, maxdiv_0.001, maxdiv_0.005, maxdiv_0.01)
+
+# Melt data 
+library(reshape)
+melted_all_collapsed <- melt(all_collapsed, id=c("refRangeID","chr","start","end", "collapse_level", "annotation"))
+
+# Plotting amount of collapsing with seq_len of haplotypes
+ggplot(melted_all_collapsed, aes(x = collapse_level, y = log10(value), fill = annotation)) + 
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.title = element_blank(),
+        text = element_text(size=20)) +
+  labs(x="Taxa", y = "log10(haplotype length)")
+
+# Plotting amount of collapsing with number of genic and intergenic haplotypes
+
+
+
+
+
+
+
 
