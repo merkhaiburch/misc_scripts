@@ -15,17 +15,6 @@ setwd("~/Box Sync/Cornell_PhD/labProjects/hackathons/2020_02_03_hackathon/data")
 library(ggplot2)
 library(dplyr)
 
-# Load file
-# Had to delete 3,5, and some empty columns to the right for file to read in
-# In sublime I removed by ^\s*$, ^\s, and by DarrowSomething
-# hap <- read.table("haplotype_table_clean.txt", header = F, sep=" ") # Evan generated
-
-# Add header
-# colnames(hap) <- c("haplotype_id", "gamete_grp_id", "ref_range_id", "seq_len")
-
-# Plotting by seq_len
-hist(hap$seq_len)
-
 
 # ------------------
 # Evan's dataframe
@@ -90,7 +79,6 @@ ggplot(all_consen_count, aes(x = method, y = haplotype_count)) +
 
 # Ref ranges 
 ref <- read.table("reference_ranges.txt", header = F, sep = ",", col.names = c("ref_range", "chrom", "start", "end"))
-
 temp <- merge(x = ref, y= consen_count_0.001, by = "ref_range")
 temp <- temp[temp$annotation == "genic",]
 # temp$range_len <- temp$end-temp$start
@@ -104,19 +92,19 @@ ggplot(temp, aes(x = start, y = haplotype_count)) +
   guides(fill=FALSE)
 
 # Investigate blank spot on chr5, dominated by large intergenic haplotypes
-# temp <- temp[which(temp$start > 199000000 & temp$start < 203500000 & temp$chrom == 5), ]
+temp <- temp[which(temp$start > 199000000 & temp$start < 203500000 & temp$chrom == 5), ]
 
-# Make a statistics table
 
+# Subset and investigate regions
 temp <- merge(x = ref, y= consen_count_0.001, by = "ref_range")
 # temp <- temp[temp$annotation == "genic",]
 # temp <- temp[which(temp$start > 124680523 & temp$start < 136656761 & temp$chrom == 8), ]
 temp <- temp[which(temp$start > 135576768 & temp$start < 135656761 & temp$chrom == 8), ]
 
 #CCN8, 135653000-135657000
-Rap2.7:135653893 - 135656761
+# Rap2.7:135653893 - 13565676
+# ZCN8: 126680523 - 126678665
 
-ZCN8: 126680523 - 126678665
 # temp$range_len <- temp$end-temp$start
 # temp <- temp[temp$chrom==1,]
 ggplot(temp, aes(x = start, y = haplotype_count)) + 
@@ -169,12 +157,7 @@ consen_hap_0.001$method <- rep("maxdiv_0.001", nrow(consen_hap_0.001))
 consen_hap_0.0005$method <- rep("maxdiv_0.0005", nrow(consen_hap_0.0005))
 consen_hap_0.0001$method <- rep("maxdiv_0.0001", nrow(consen_hap_0.0001))
 
-
-
-
-
-
-
+# Filter and plot
 temp <- consen_count_0.001
 temp <- temp[temp$haplotype < 35377, ]
 temp <- temp[temp$haplotype < 7000, ]
@@ -208,53 +191,42 @@ ggplot(mdata, aes(x = variable, y = log10(value), fill = annotation)) +
   facet_wrap(~annotation, nrow = 2)+ guides(fill=FALSE)
 
 
-# ----------------------
-# Collapsed haplotypes
-# ----------------------
+# --------------------------------------
+#  Investigate aligned haplotype lengths
+# --------------------------------------
 
-# Load in other levels of collapsed haplotypes
-# 0.0001, 0.0005, 0.001, 0.005, 0.01
-maxdiv_0.0001 <- read.table(, header = TRUE)
-maxdiv_0.0005 <- read.table(, header = TRUE)
-maxdiv_0.001 <- read.table(, header = TRUE)
-maxdiv_0.005 <- read.table(, header = TRUE)
-maxdiv_0.01 <- read.table(, header = TRUE)
+# Read in file Zack sent 
+distances <- read.delim("outputDistances_2ndTry.txt")
 
-# Add collapsing type
-maxdiv_0.0001$collapse_level <- rep("maxdiv_0.0001", nrow(maxdiv_0.0001))
-maxdiv_0.0005$collapse_level <- rep("maxdiv_0.0005", nrow(maxdiv_0.0005))
-maxdiv_0.001$collapse_level <- rep("maxdiv_0.001", nrow(maxdiv_0.001))
-maxdiv_0.005$collapse_level <- rep("maxdiv_0.005", nrow(maxdiv_0.005))
-maxdiv_0.01$collapse_level <- rep("maxdiv_0.01", nrow(maxdiv_0.01))
+# Both haplengths similar
+par(mfrow = c(2,1))
+hist(distances$taxa1HapLength-distances$denominator)
+hist(distances$taxa2HapLength-distances$denominator)
 
-# Add genic or intergenic flag
-maxdiv_0.0001$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
-maxdiv_0.0005$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
-maxdiv_0.001$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
-maxdiv_0.005$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
-maxdiv_0.01$annotation <- c(rep("genic", 71354/2), rep("intergenic", 71354/2))
+summary(distances$taxa1HapLength-distances$denominator)
+summary(distances$taxa2HapLength-distances$denominator)
 
-# Combine dataframes
-all_collapsed <- rbind(hap, maxdiv_0.0001, maxdiv_0.0005, maxdiv_0.001, maxdiv_0.005, maxdiv_0.01)
-
-# Melt data 
-library(reshape)
-melted_all_collapsed <- melt(all_collapsed, id=c("refRangeID","chr","start","end", "collapse_level", "annotation"))
-
-# Plotting amount of collapsing with seq_len of haplotypes
-ggplot(melted_all_collapsed, aes(x = collapse_level, y = log10(value), fill = annotation)) + 
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
-        legend.title = element_blank(),
-        text = element_text(size=20)) +
-  labs(x="Taxa", y = "log10(haplotype length)")
-
-# Plotting amount of collapsing with number of genic and intergenic haplotypes
+# Hap1 length against length of denominator
+par(mfrow = c(1,1))
+plot(log(distances$denominator),log(distances$taxa1HapLength))
 
 
+# Separate
+distances$genic <- distances$refId < max(distances$refId)/2
 
+# Split density bins
+ggplot(distances, aes(log10(denominator), log10(taxa1HapLength), fill = log10(..count..)))+
+  geom_hex() +
+  facet_wrap(~genic) +
+  theme(text = element_text(size=20)) +
+  labs(x = "log10(denominator len)", x = "log10(Taxa 1 haplotype length)")
 
-
+# Split histograms
+ggplot(distances, aes(distances$denominator/distances$taxa1HapLength))+
+  geom_histogram() +
+  facet_wrap(~genic) +
+  theme(text = element_text(size=20)) +
+  labs(x = "log10(denominator len)/log10(Taxa 1 haplotype length)")
 
 
 
