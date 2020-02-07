@@ -47,6 +47,10 @@ do
 done
 
 
+# ------------------------------
+# Run TASSEL 4 MLM on chr10 only
+# ------------------------------
+
 # Generate kinship matrix for NAM
 /programs/tassel-5-standalone/run_pipeline.pl \
   -debug /workdir/mbb262/goodman282/debug_kinship_chr10.log \
@@ -69,6 +73,15 @@ done
   -mlm -mlmVarCompEst P3D -mlmCompressionLevel None \
   -mlmOutputFile /workdir/mbb262/goodman282/gwas_results/MLM_goodman282_kinship \
   -runfork1 -runfork2 -runfork3
+
+
+
+
+
+
+
+
+
 
 
 
