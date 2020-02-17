@@ -76,7 +76,7 @@ done
 
 
 
-
+/workdir/mbb262/nam_founders/filtered_nam_founders
 
 
 
