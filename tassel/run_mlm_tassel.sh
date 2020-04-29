@@ -16,7 +16,7 @@
 # Generate kinship matrix for NAM
 /programs/tassel-5-standalone/run_pipeline.pl \
   -debug /home/mbb262/tassel_gwa/results/2019_12_04_ames2nam_comparisons/debug_kinshipMatrix.log \
-  -Xmx120g \
+  -Xmx420g \
   -importGuess /home/mbb262/tassel_gwa/data/ZeaGBSv27_publicSamples_imputedV5_AGPv4-181023_NAM_only_main200_maf035.vcf \
   -KinshipPlugin \
   -method Centered_IBS \
