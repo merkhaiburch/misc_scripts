@@ -2,3 +2,17 @@
 hackathons/hackathon_june_2019/data/
 
 .Rhistory
+
+cobra_test/.idea/
+
+cobra_test/.ipynb_checkpoints/
+
+*.sbml
+
+cobra_test/TS4_Model.xml
+
+cobra_test/Corn_pathways.20200125
+
+cobra_test/get-pip.py
+
+cobra_test/untitled
