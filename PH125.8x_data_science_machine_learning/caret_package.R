@@ -198,19 +198,140 @@ dat <- mutate(reported_heights, date_time = ymd_hms(time_stamp)) %>%
   mutate(type = ifelse(day(date_time) == 25 & hour(date_time) == 8 & between(minute(date_time), 15, 30), "inclass","online")) %>%
   select(sex, type)
 
-y <- factor(dat$sex, c("Female", "Male"))
+dat$sex <- factor(dat$sex, c("Female", "Male"))
 x <- dat$type
 
-# Random guessing
-y_hat <- sample(c("Male", "Female"), length(y), replace = TRUE)
-y_hat <- sample(c("Male", "Female"), length(y), replace = TRUE) %>% 
-  factor(levels = levels(as.factor(dat$sex)))
-mean(y_hat == dat$sex) # compute accuracy
+table(dat)
 
-# Use type instead of a height cutoff
+# Use type (online/in person) to predict sex
 y_hat <- ifelse(dat$type == "online", "Male", "Female") %>% factor(levels = levels(as.factor(dat$sex)))
 mean(y == y_hat)
 
+# Write a line of code using the table() function to show the confusion matrix between y_hat and y
+# table(y_hat, y)
+table(predicted = y_hat, actual = dat$sex)
+
+# Test the sensitivity of the prediction
+caret::sensitivity(data = y_hat, reference = dat$sex)
+
+# Test the specificity of tge prection
+caret::specificity(data = y_hat, reference = dat$sex)
+
+# What is the prevalance of females in the dataset (in the entire confusion matrix)
+confusionMatrix(data = y_hat, reference = dat$sex)
 
 
+# ------------------------------
+# Comprehension Check: Practice with Machine Learning, Part 2
+# ------------------------------
 
+# Use the iris dataset, remove the setosa species and foucs on
+# versicolor and virginica iris species
+
+library(caret)
+data(iris)
+iris <- iris[-which(iris$Species=='setosa'),]
+y <- iris$Species
+
+# create an even split of the data into train and test partitions using 
+#    createDataPartition() from the caret package.
+set.seed(2, sample.kind="Rounding")
+test_index <- createDataPartition(y, times = 1, p = 0.5, list = FALSE)
+test <- iris[test_index,]
+train <- iris[-test_index,]
+
+# Next we will figure out the singular feature in the dataset that yields the 
+#   greatest overall accuracy when predicting species. You can use the code 
+#   from the introduction and from Q7 to start your analysis.
+# Using only the train iris dataset, for each feature, perform a simple search to 
+#   find the cutoff that produces the highest accuracy, predicting virginica if greater 
+#   than the cutoff and versicolor otherwise. Use the seq function over the range of each 
+#   feature by intervals of 0.1 for this search.
+
+# # guess the outcome
+# y_hat <- sample(c("versicolor", "virginica"), length(test), replace = TRUE)
+# y_hat <- sample(c("versicolor","virginica"), length(test), replace = TRUE) %>% 
+#   factor(levels = levels(test$Species))
+# 
+# # compute accuracy
+# mean(y_hat == test$Species)
+
+# Set up variables
+x_dat <- train$Petal.Length
+
+# examine the accuracy of multiple cutoffs (ONLY PRODUCES THE RIGHT ANSWER WHEN SPECIES LEVELS ARE IN THIS ORDER)
+cutoff <- seq(min(x_dat), max(x_dat), by = 0.1)
+accuracy <- sapply(cutoff, function(x){
+  y_hat <- ifelse(train$Petal.Length > x, "virginica", "versicolor") 
+  mean(y_hat == train$Species)
+})
+max(accuracy)
+plot(cutoff, accuracy)
+best_cutoff <- cutoff[which.max(accuracy)]
+best_cutoff
+
+# From the answers
+foo <- function(x){
+  rangedValues <- seq(range(x)[1],range(x)[2],by=0.1)
+  print(rangedValues)
+  sapply(rangedValues,function(i){
+    y_hat <- ifelse(x>i,'virginica','versicolor')
+    mean(y_hat==train$Species)
+  })
+}
+predictions <- apply(test[,-5],2,foo)
+sapply(predictions,max)	
+
+# Use the best cutoff value from the training data to calculate accuracy in the test data
+y_hat <- ifelse(test$Petal.Length > 4, "versicolor","virginica")
+mean(y_hat == train$Species)
+
+
+# CORRECT ANSWER
+var1 <- 3
+predictions <- foo(train[,var1])
+rangedValues <- seq(range(train[,var1])[1],range(train[,var1])[2],by=0.1)
+cutoffs <-rangedValues[which(predictions==max(predictions))]
+
+y_hat <- ifelse(test[,var1]>cutoffs[1],'virginica','versicolor')
+mean(y_hat==test$Species)
+
+# Use the test data as the training data 
+# From the answers
+foo <- function(x){
+  rangedValues <- seq(range(x)[1],range(x)[2],by=0.1)
+  print(rangedValues)
+  sapply(rangedValues,function(i){
+    y_hat <- ifelse(x>i,'virginica','versicolor')
+    mean(y_hat==test$Species)
+  })
+}
+predictions <- apply(test[,-5],2,foo)
+sapply(predictions,max)	
+
+# Use the best cutoff value from the training data to calculate accuracy in the test data
+y_hat <- ifelse(test$Petal.Length > 4, "versicolor","virginica")
+mean(y_hat == test$Species)
+
+
+# Plot the data
+plot(iris,pch=21,bg=iris$Species)
+
+# OPtimize test data to be the new training data
+foo <- function(x){
+  rangedValues <- seq(range(x)[1],range(x)[2],by=0.1)
+  sapply(rangedValues,function(i){
+    y_hat <- ifelse(x>i,'virginica','versicolor')
+    mean(y_hat==test$Species)
+  })
+}
+predictions <- apply(test[,-5],2,foo)
+sapply(predictions,max)	
+
+var1 <- 4
+predictions <- foo(test[,var1])
+rangedValues <- seq(range(test[,var1])[1],range(test[,var1])[2],by=0.1)
+cutoffs <-rangedValues[which(predictions==max(predictions))]
+
+y_hat <- ifelse(train[,var1]>cutoffs[1],'virginica','versicolor')
+mean(y_hat==train$Species)
