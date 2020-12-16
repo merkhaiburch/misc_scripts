@@ -36,9 +36,9 @@ minimap2 -ax sr \
     -A 1 \
     -B 5 \
     -O 39,81 \
-    -N 6000 \
-    -f  \
-    -k  \
+    -N 15000 \
+    -f 600000 \
+    -k 4 \
     --secondary=yes \
     ./b73_v5.mmi \
     ./maize_TE_db_exemplars.sine.fa > sine_alignment.sam
@@ -46,9 +46,26 @@ minimap2 -ax sr \
 
 # Count the number of matches
 wc -l sine_alignment.sam
-#wc -l temp.txt
 
-# View file
-vim sine_alignment.sam
+
+# SINE finder parameters parameters
+minimap2 -ax sr \
+    -t 30 \
+    -A 1 \
+    -B 5 \
+    -O 39,81 \
+    -N 15000 \
+    -f 0 \
+    -k 4 \
+    -w 1 \
+    -n 2 \
+    --secondary=yes \
+    ./b73_v5.mmi \
+    ./maize_TE_db_exemplars.sine.fa > sine_finder_align.sam
+
+
+wc -l sine_finder_align.sam
+
+
 
 
