@@ -15,12 +15,9 @@
 # gunzip *.gz
 
 
-# ----------------
-# Minimap stuff
-# ----------------
-
-# Get help
-# /programs/minimap2-2.17/minimap2 --help
+# ------------------
+# Minimap2 on SINEs
+# ------------------
 
 # Set path to program
 export PATH=/programs/minimap2-2.17:$PATH
@@ -47,24 +44,68 @@ minimap2 -ax sr \
 # Count the number of matches
 wc -l sine_alignment.sam
 
+# convert sam to bam and load into r
+samtools view -S -b \
+    sine_alignment.sam > sine_alignment.bam
+samtools view sine_alignment.bam | head
 
-# SINE finder parameters parameters
+# Download v1 of maize genome
+wget http://ftp.maizesequence.org/release-4a.53/assembly/ZmB73_AGPv1_genome.fasta.gz
+gunzip *
+
+# Index the genome
+minimap2 -d \
+    ./b73_v1.mmi \
+    ./ZmB73_AGPv1_genome.fasta
+
+# Run minimap on v1 of maize genome
 minimap2 -ax sr \
     -t 30 \
     -A 1 \
     -B 5 \
     -O 39,81 \
     -N 15000 \
-    -f 0 \
+    -f 600000 \
     -k 4 \
-    -w 1 \
-    -n 2 \
+    --secondary=yes \
+    ./b73_v1.mmi \
+    ./maize_TE_db_exemplars.sine.fa > v1_sine_alignment.sam
+
+# convert sam to bam and load into r
+samtools view -S -b \
+    v1_sine_alignment.sam > v1_sine_alignment.bam
+samtools view v1_sine_alignment.bam | head
+
+
+# ------------------
+# Minimap2 on Ds1
+# ------------------
+
+
+# Run minimap2 on Ds1 elements in v5
+minimap2 -ax sr \
+    -t 30 \
+    -A 1 \
+    -B 5 \
+    -O 39,81 \
+    -N 15000 \
+    -f 600000 \
+    -k 4 \
     --secondary=yes \
     ./b73_v5.mmi \
-    ./maize_TE_db_exemplars.sine.fa > sine_finder_align.sam
+    ./ds1.fa > ds1_alignment.sam
 
 
-wc -l sine_finder_align.sam
+# Count the number of matches
+wc -l ds1_alignment.sam
+
+# convert sam to bam and load into r
+samtools view -S -b \
+    ds1_alignment.sam > ds1_alignment.bam
+samtools view ds1_alignment.bam | head
+
+
+# Run minimap2 on Ds1 elements in v1
 
 
 

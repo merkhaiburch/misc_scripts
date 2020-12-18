@@ -58,4 +58,28 @@ subsetByOverlaps(tmp, bam_sf_overlap) %>% as.data.frame()
 countOverlaps(tmp, bam_sf_overlap)
 
 
+# V1 sine bam
+# Load in sam file with found SINEs in V5
+bam_v1 <- Rsamtools::scanBam("~/Downloads/v1_sine_alignment.bam")
+
+# Turn into a dataframe
+bam_v1 <- do.call("DataFrame", bam_v1) %>% as.data.table()
+bam_v1$end <- bam_v1$pos+bam_v1$qwidth
+bam_v1$where <- rep("minimap", nrow(bam_v1))
+
+# Make table of counts by family
+table(bam_v1$qname)
+
+# turn into genomic range object
+bam_v1 <- GenomicRanges::makeGRangesFromDataFrame(bam_v1, keep.extra.columns = TRUE, 
+                                               start.field = "pos", end.field = "end",
+                                               seqnames.field = "rname")
+
+
+# Ds1 alignmenys
+
+# Ds1 against v5
+bam_v5_ds1 <- Rsamtools::scanBam("~/Downloads/ds1_alignment.bam")
+bam_v5_ds1 <- do.call("DataFrame", bam_v5_ds1) %>% as.data.table()
+
 
