@@ -105,8 +105,57 @@ samtools view -S -b \
 samtools view ds1_alignment.bam | head
 
 
-# Run minimap2 on Ds1 elements in v1
+# Run minimap2 on Ds1 elements in v2
+wget ftp://ftp.ensemblgenomes.org/pub/plants/release-7/fasta/zea_mays/dna/Zea_mays.AGPv2.dna.toplevel.fa
+
+# Index the genome
+minimap2 -d \
+    ./b73_v2.mmi \
+    ./Zea_mays.AGPv2.dna.toplevel.fa
+
+# -f 0 filter nothing
+# -w 1 keep all matching kmers
+
+minimap2 -ax sr \
+    -t 30 \
+    -A 1 \
+    -B 5 \
+    -O 39,81 \
+    -N 15000 \
+    -f 600000 \
+    -k 4 \
+    --secondary=yes \
+    ./b73_v2.mmi \
+    ./ds1.fa > v2_ds1_alignment.sam
 
 
+# Count the number of matches
+wc -l v2_ds1_alignment.sam
 
+# convert sam to bam and load into r
+samtools view -S -b \
+    v2_ds1_alignment.sam > v2_ds1_alignment.bam
+samtools view v2_ds1_alignment.bam | head
+
+# ds1 to v1
+minimap2 -ax sr \
+    -t 30 \
+    -A 1 \
+    -B 5 \
+    -O 39,81 \
+    -N 15000 \
+    -f 600000 \
+    -k 4 \
+    --secondary=yes \
+    /workdir/mbb262/sine_results/b73_v1.mmi \
+    ./ds1.fa > v1_ds1_alignment.sam
+
+
+# Count the number of matches
+wc -l v1_ds1_alignment.sam
+
+# convert sam to bam and load into r
+samtools view -S -b \
+    v1_ds1_alignment.sam > v1_ds1_alignment.bam
+samtools view v1_ds1_alignment.bam | head
 

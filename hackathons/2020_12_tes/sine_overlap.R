@@ -81,5 +81,12 @@ bam_v1 <- GenomicRanges::makeGRangesFromDataFrame(bam_v1, keep.extra.columns = T
 # Ds1 against v5
 bam_v5_ds1 <- Rsamtools::scanBam("~/Downloads/ds1_alignment.bam")
 bam_v5_ds1 <- do.call("DataFrame", bam_v5_ds1) %>% as.data.table()
+dim(bam_v5_ds1)
 
+bam_v2_ds1 <- Rsamtools::scanBam("~/Downloads/v2_ds1_alignment.bam")
+bam_v2_ds1 <- do.call("DataFrame", bam_v2_ds1) %>% as.data.table()
+dim(bam_v2_ds1)
 
+bam_v1_ds1 <- Rsamtools::scanBam("~/Downloads/v1_ds1_alignment.bam")
+bam_v1_ds1 <- do.call("DataFrame", bam_v1_ds1) %>% as.data.table()
+dim(bam_v1_ds1)
