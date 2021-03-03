@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ---------------------------------------------------------------
-# Author.... Merritt Burch
+# Author.... Merritt Khaipho-Burch
 # Contact... mbb262@cornell.edu
 # Date...... 2021-- 
 #
