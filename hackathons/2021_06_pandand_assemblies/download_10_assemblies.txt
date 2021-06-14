@@ -1,3 +1,15 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------
+# Author.... Merritt Khaipho-Burch
+# Contact... mbb262@cornell.edu
+# Date...... 2021-06-14 
+#
+# Description 
+#   - Download 10 assemblies from ibl for kmer dist. hackathon
+#   - rename assemblies to short names that make sense
+# ---------------------------------------------------------------
+
 # -------------------------------------
 # icommands to download focal genomes
 # -------------------------------------
@@ -86,23 +98,4 @@ mv AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_2.fq.gz coix_lacryma_job
 # Arthraxon junnarensis (Kew 88886) [AN21TSTL0030]
 mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_1.fq.gz arthraxon_junnarensis_1.fq.gz
 mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_2.fq.gz arthraxon_junnarensis_2.fq.gz
-
-
-# -------------------------------------
-# Use trimmotatic
-# -------------------------------------
-
-# Zea mays
-java -jar /programs/trimmomatic/trimmomatic-0.39.jar \
-    PE \
-    -threads 35 \
-    zea_mays_1.fq.gz zea_mays_2.fq.gz \
-    zea_mays_pairedreads.fastq zea_mays_unpairedreads.fastq
-
-
-java -jar /programs/trimmomatic/trimmomatic-0.39.jar [your_options_here]
-
-java -jar /programs/trimmomatic/trimmomatic-0.39.jar PE -phred33 paired_end_reads_1.fastq paired_end_reads_2.fastq kept_paired_end_reads_1.fastq unpaired_1.fastq kept_paired_end_reads_2.fastq  unpaired_2.fastq
-
-
 
