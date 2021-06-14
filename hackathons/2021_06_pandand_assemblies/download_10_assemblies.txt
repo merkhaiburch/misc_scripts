@@ -1,0 +1,108 @@
+# -------------------------------------
+# icommands to download focal genomes
+# -------------------------------------
+
+# Zea mays (B73) [?]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data/A15NUN_0001/A15NUN_0001_USPD16083894-AK4990_HJ3CGCCXY_L8_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data/A15NUN_0001/A15NUN_0001_USPD16083894-AK4990_HJ3CGCCXY_L8_2.fq.gz
+
+# Zea diploperennis (Leaf from Kellogg PI 441930) [?]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL020/MCRTL020_CKDL200164854-1a-AK6510-AK6670_HMGJWDSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL020/MCRTL020_CKDL200164854-1a-AK6510-AK6670_HMGJWDSXY_L4_2.fq.gz
+
+# Tripsacum dactyloides var floridanum (Buckler lab clone T007-0002) [?]
+iget /ibl/home/RawSeqData/WGS/Tripsacum/C202SC17060924/raw_data/T0007/T0007_USPD16080542-1_H3325CCXY_L3_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/Tripsacum/C202SC17060924/raw_data/T0007/T0007_USPD16080542-1_H3325CCXY_L3_2.fq.gz
+
+# Vossia cuspidata (Buckler lab clone A1077-0002) [?]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC19040128/raw_data/A1077002/A1077002_USPD16097230-AK4973-AK12977_HJM33DSXX_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC19040128/raw_data/A1077002/A1077002_USPD16097230-AK4973-AK12977_HJM33DSXX_L4_2.fq.gz
+
+# Chrysopogon aciculatus (AUB 135) [AN21TSTL0006]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL042/MCRTL042_CKDL200164855-1B-AK6514-AK6680_HMJV7DSXY_L3_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL042/MCRTL042_CKDL200164855-1B-AK6514-AK6680_HMJV7DSXY_L3_2.fq.gz
+
+# Themeda avenacea (AQ0476980) [AN20TSCR000216]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F002/raw_data/AN20T012/AN20T012_CKDL200169515-1a-AK5845-AK6676_HLTF5DSXY_L3_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F002/raw_data/AN20T012/AN20T012_CKDL200169515-1a-AK5845-AK6676_HLTF5DSXY_L3_2.fq.gz
+
+# Andropogon gerardii (USA: Kansas, Ellis) [AN20NSCR000358]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC19101387-Z01-F002/raw_data/AN20N001/AN20N001_CKDL200149282-1a-AK4958-7UDI938_HNLFVDSXX_L1_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC19101387-Z01-F002/raw_data/AN20N001/AN20N001_CKDL200149282-1a-AK4958-7UDI938_HNLFVDSXX_L1_2.fq.gz
+
+# Ischaemum koenigii (Pasquet 1196) [AN21TNTL0138]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0138/AN21TNTL0138_CKDL210009738-1a-AK6510-AK6670_H5C7LDSX2_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0138/AN21TNTL0138_CKDL210009738-1a-AK6510-AK6670_H5C7LDSX2_L4_2.fq.gz
+
+# Coix lacryma-jobi (PI 324509) [AN21TSTL0025]
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS25/AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS25/AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_2.fq.gz
+
+# Arthraxon junnarensis (Kew 88886) [AN21TSTL0030] --> REDO
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS30/AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS30/AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_2.fq.gz
+
+
+# -------------------------------------
+# change names to something more intitiutive
+# -------------------------------------
+
+# Zea mays (B73) [?]
+mv A15NUN_0001_USPD16083894-AK4990_HJ3CGCCXY_L8_1.fq.gz zea_mays_1.fq.gz
+mv A15NUN_0001_USPD16083894-AK4990_HJ3CGCCXY_L8_2.fq.gz zea_mays_2.fq.gz
+
+# Zea diploperennis (Leaf from Kellogg PI 441930) [?]
+mv MCRTL020_CKDL200164854-1a-AK6510-AK6670_HMGJWDSXY_L4_1.fq.gz zea_diploperennis_1.fq.gz
+mv MCRTL020_CKDL200164854-1a-AK6510-AK6670_HMGJWDSXY_L4_2.fq.gz zea_diploperennis_2.fq.gz
+
+# Tripsacum dactyloides var floridanum (Buckler lab clone T007-0002) [?]
+mv T0007_USPD16080542-1_H3325CCXY_L3_1.fq.gz tripsacum_dactyloides_floridanum_1.fq.gz
+mv T0007_USPD16080542-1_H3325CCXY_L3_2.fq.gz tripsacum_dactyloides_floridanum_2.fq.gz
+
+# Vossia cuspidata (Buckler lab clone A1077-0002) [?]
+mv A1077002_USPD16097230-AK4973-AK12977_HJM33DSXX_L4_1.fq.gz vossia_cuspidata_1.fq.gz
+mv A1077002_USPD16097230-AK4973-AK12977_HJM33DSXX_L4_2.fq.gz vossia_cuspidata_2.fq.gz
+
+# Chrysopogon aciculatus (AUB 135) [AN21TSTL0006]
+mv MCRTL042_CKDL200164855-1B-AK6514-AK6680_HMJV7DSXY_L3_1.fq.gz chrysopogon_aciculatus_1.fq.gz
+mv MCRTL042_CKDL200164855-1B-AK6514-AK6680_HMJV7DSXY_L3_2.fq.gz chrysopogon_aciculatus_2.fq.gz
+
+# Themeda avenacea (AQ0476980) [AN20TSCR000216] --> next one to download
+mv AN20T012_CKDL200169515-1a-AK5845-AK6676_HLTF5DSXY_L3_1.fq.gz themeda_avenacea_1.fq.gz
+mv AN20T012_CKDL200169515-1a-AK5845-AK6676_HLTF5DSXY_L3_2.fq.gz themeda_avenacea_2.fq.gz
+
+# Andropogon gerardii (USA: Kansas, Ellis) [AN20NSCR000358]
+mv AN20N001_CKDL200149282-1a-AK4958-7UDI938_HNLFVDSXX_L1_1.fq.gz andropogon_gerardii_1.fq.gz
+mv AN20N001_CKDL200149282-1a-AK4958-7UDI938_HNLFVDSXX_L1_2.fq.gz andropogon_gerardii_2.fq.gz
+
+# Ischaemum koenigii (Pasquet 1196) [AN21TNTL0138]
+mv AN21TNTL0138_CKDL210009738-1a-AK6510-AK6670_H5C7LDSX2_L4_1.fq.gz ischaemum_koenigii_1.fq.gz
+mv AN21TNTL0138_CKDL210009738-1a-AK6510-AK6670_H5C7LDSX2_L4_2.fq.gz ischaemum_koenigii_2.fq.gz
+
+# Coix lacryma-jobi (PI 324509) [AN21TSTL0025]
+mv AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_1.fq.gz coix_lacryma_jobi_1.fq.gz
+mv AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_2.fq.gz coix_lacryma_jobi_2.fq.gz
+
+# Arthraxon junnarensis (Kew 88886) [AN21TSTL0030]
+mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_1.fq.gz arthraxon_junnarensis_1.fq.gz
+mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_2.fq.gz arthraxon_junnarensis_2.fq.gz
+
+
+# -------------------------------------
+# Use trimmotatic
+# -------------------------------------
+
+# Zea mays
+java -jar /programs/trimmomatic/trimmomatic-0.39.jar \
+    PE \
+    -threads 35 \
+    zea_mays_1.fq.gz zea_mays_2.fq.gz \
+    zea_mays_pairedreads.fastq zea_mays_unpairedreads.fastq
+
+
+java -jar /programs/trimmomatic/trimmomatic-0.39.jar [your_options_here]
+
+java -jar /programs/trimmomatic/trimmomatic-0.39.jar PE -phred33 paired_end_reads_1.fastq paired_end_reads_2.fastq kept_paired_end_reads_1.fastq unpaired_1.fastq kept_paired_end_reads_2.fastq  unpaired_2.fastq
+
+
+
