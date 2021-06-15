@@ -50,9 +50,37 @@ iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN2
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS25/AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_1.fq.gz
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS25/AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_2.fq.gz
 
-# Arthraxon junnarensis (Kew 88886) [AN21TSTL0030] --> REDO
+# Arthraxon junnarensis (Kew 88886) [AN21TSTL0030]
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS30/AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_1.fq.gz
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS30/AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_2.fq.gz
+
+# Dichanthium foveolatum --> other team's genomes
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL004/MCRTL004_CKDL200164854-1a-AK6501-AK6655_HMGJWDSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL004/MCRTL004_CKDL200164854-1a-AK6501-AK6655_HMGJWDSXY_L4_2.fq.gz
+
+# Eulaliopsis binata
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL015/MCRTL015_CKDL200164854-1a-AK5151-AK6665_HMGJWDSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL015/MCRTL015_CKDL200164854-1a-AK5151-AK6665_HMGJWDSXY_L4_2.fq.gz
+
+# Anadelphia scyphofera
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL031/MCRTL031_CKDL200164855-1B-AK5845-AK6676_HMJV7DSXY_L3_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL031/MCRTL031_CKDL200164855-1B-AK5845-AK6676_HMJV7DSXY_L3_2.fq.gz
+
+#Schizachyrium sanguineum
+iget ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL034/MCRTL034_CKDL200164855-1B-AK6517-AK6687_HMJV7DSXY_L3_1.fq.gz
+iget ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL034/MCRTL034_CKDL200164855-1B-AK6517-AK6687_HMJV7DSXY_L3_2.fq.gz
+
+# Schizachyrium fragile
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL062/MCRTL062_CKDL200164856-1B-AK5158-AK6684_HMJV7DSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL062/MCRTL062_CKDL200164856-1B-AK5158-AK6684_HMJV7DSXY_L4_2.fq.gz 
+
+# Hyparrhenia involucrata
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL064/MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_1.fq.gz
+iget/ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL064/MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_2.fq.gz
+
+# Andropogon longiberbis
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL068/MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_1.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL068/MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_2.fq.gz
 
 
 # -------------------------------------
@@ -99,3 +127,30 @@ mv AN21TS25_CKDL210002323-1a-AK6532-AK6712_HVGWVDSXY_L3_2.fq.gz coix_lacryma_job
 mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_1.fq.gz arthraxon_junnarensis_1.fq.gz
 mv AN21TS30_CKDL210002324-1a-AK6516-AK4469_HVGWVDSXY_L4_2.fq.gz arthraxon_junnarensis_2.fq.gz
 
+# Dichanthium foveolatum --> other team's genomes
+mv MCRTL004_CKDL200164854-1a-AK6501-AK6655_HMGJWDSXY_L4_1.fq.gz dichanthium_foveolatum_1.fq.gz
+mv MCRTL004_CKDL200164854-1a-AK6501-AK6655_HMGJWDSXY_L4_2.fq.gz dichanthium_foveolatum_2.fq.gz
+
+# Eulaliopsis binata
+mv MCRTL015_CKDL200164854-1a-AK5151-AK6665_HMGJWDSXY_L4_1.fq.gz eulaliopsis_binata_1.fq.gz
+mv MCRTL015_CKDL200164854-1a-AK5151-AK6665_HMGJWDSXY_L4_2.fq.gz eulaliopsis_binata_2.fq.gz
+
+# Anadelphia scyphofera
+mv MCRTL031_CKDL200164855-1B-AK5845-AK6676_HMJV7DSXY_L3_1.fq.gz anadelphia_scyphofera_1.fq.gz
+mv MCRTL031_CKDL200164855-1B-AK5845-AK6676_HMJV7DSXY_L3_2.fq.gz anadelphia_scyphofera_2.fq.gz
+
+#Schizachyrium sanguineum
+mv MCRTL034_CKDL200164855-1B-AK6517-AK6687_HMJV7DSXY_L3_1.fq.gz schizachyrium_sanguineum_1.fq.gz
+mv MCRTL034_CKDL200164855-1B-AK6517-AK6687_HMJV7DSXY_L3_2.fq.gz schizachyrium_sanguineum_2.fq.gz
+
+# Schizachyrium fragile
+mv MCRTL062_CKDL200164856-1B-AK5158-AK6684_HMJV7DSXY_L4_1.fq.gz schizachyrium_fragile_1.fq.gz
+mv MCRTL062_CKDL200164856-1B-AK5158-AK6684_HMJV7DSXY_L4_2.fq.gz schizachyrium_fragile_2.fq.gz
+
+# Hyparrhenia involucrata
+mv MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_1.fq.gz hyparrhenia_involucrata_1.fq.gz
+mv MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_2.fq.gz hyparrhenia_involucrata_2.fq.gz
+
+# Andropogon longiberbis
+mv MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_1.fq.gz andropogon_longiberbis_1.fq.gz
+mv MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_2.fq.gz andropogon_longiberbis_2.fq.gz
