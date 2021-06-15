@@ -76,7 +76,7 @@ iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCR
 
 # Hyparrhenia involucrata
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL064/MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_1.fq.gz
-iget/ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL064/MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_2.fq.gz
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL064/MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_2.fq.gz
 
 # Andropogon longiberbis
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL068/MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_1.fq.gz
