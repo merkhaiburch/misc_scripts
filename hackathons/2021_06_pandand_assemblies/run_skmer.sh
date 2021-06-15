@@ -20,24 +20,47 @@ jellyfish --version
 mash --version
 seqtk
 
+
+# -------------------------------
+# Run skmer on 100k random reads
+# -------------------------------
+
 # Create a reference 
-/home/mbb262/bioinformatics/Skmer/skmer \
+skmer \
     reference \
-    /home/hackathon/subsampled_seq2 \
+    /workdir/hackathon/subsampled_seq2 \
     -p 20 \
-    panand_skmer_16_genomes \
-    -l /workdir/hackathon/skmer_results \
-    -o panand_skmer_16_genomes
+    -l /workdir/hackathon/skmer_results/panand16results \
+    -o /workdir/hackathon/skmer_results/panand_skmer_16_genomes
 
 # Compute distances
-/home/mbb262/bioinformatics/Skmer/skmer \
+skmer \
     distance \
-    panand_skmer_16_genomes \
+    /workdir/hackathon/skmer_results/panand16results \
     -t \
-    -o jc-dist-mat-pandand16
+    -o /workdir/hackathon/skmer_results/jc-dist-mat-pandand16
 
-# Run the query
-/home/mbb262/bioinformatics/Skmer/skmer \
-    query \
-    qry.fastq \
-    library
+
+# -------------------------------
+# Run skmer on 1M random reads
+# -------------------------------
+
+# Create a reference 
+skmer \
+    reference \
+    /workdir/hackathon/subsampled_seq2_1m \
+    -p 20 \
+    -l /workdir/hackathon/skmer_results/panand16results_1m \
+    -o /workdir/hackathon/skmer_results/panand_skmer_16_genomes_1m
+
+# Compute distances
+skmer \
+    distance \
+    /workdir/hackathon/skmer_results/panand16results_1m \
+    -t \
+    -o /workdir/hackathon/skmer_results/jc-dist-mat-pandand16_1m
+
+
+
+
+
