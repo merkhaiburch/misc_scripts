@@ -7,19 +7,19 @@
 #
 # Description 
 #   - Calculate a genomic relationship matrix for NAM and 282
-#   - unimputed SNPs using TASSEL
+#   - Use PHG imputed SNPs for:
+#   - 1) genome wide SNPs 2) SNPs only within specific intervals
 # ---------------------------------------------------------------
 
 # Get data from cbsu
-# scp mbb262@cbsublfs1.biohpc.cornell.edu: /workdir/mbb262
+# 
 
-
-# Loop through each chromosome, calculate LD
+# Loop through each chromosome, calculate kinship genome wide
 for CHROM in {1..10}
 do
   echo "Start analyzing chromosome ${CHROM}"
   /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
-    -debug /workdir/mbb262/ld_matrices/debug_calculateLD_chr${CHROM}_nam.log \
+    -debug /workdir/mbb262/ld_matrices/debug_calculate_grm_chr${CHROM}_nam.log \
     -Xmx195g \
     -maxThreads 39 \
     -importGuess /workdir/mbb262/ -noDepth \

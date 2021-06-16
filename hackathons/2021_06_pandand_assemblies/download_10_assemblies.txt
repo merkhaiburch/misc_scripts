@@ -82,6 +82,162 @@ iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCR
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL068/MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_1.fq.gz
 iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL068/MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_2.fq.gz
 
+# Tripsacum andersonii --> start downloading from here
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data_1/T204P0001/T204P0001_USPD16083893-AK4248_HKYCFCCXY_L2_1.fq.gz
+
+# Tripsacum australe
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS45/AN21TS45_CKDL210002324-1a-AK5154-AK6672_HVGWVDSXY_L4_1.fq.gz
+
+# tripsacum_cundinamarcae
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data_1/T207P0001/T207P0001_USPD16083893-AK4977_HKYCFCCXY_L2_1.fq.gz
+
+# tripsacum_dactyloides
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC19101387-Z01-F002/raw_data/AN20N047/AN20N047_CKDL200149282-1a-AK4982-7UDI938_HNLFVDSXX_L1_1.fq.gz
+
+# tripsacum_dactyloides_meridionale
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data_1/T006P0002/T006P0002_USPD16083893-AK4972_HKYCFCCXY_L2_1.fq.gz
+
+# tripsacum_intermedium
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data_1/T210P0001/T210P0001_USPD16083893-AK1953_HKYCFCCXY_L2_1.fq.gz
+
+# tripsacum_jalapense
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS13/AN21TS13_CKDL210002323-1a-AK1412-AK6371_HVGWVDSXY_L3_1.fq.gz
+
+# tripsacum_lanceilatum
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS48/AN21TS48_CKDL210002324-1a-AK5156-AK6704_HVGWVDSXY_L4_1.fq.gz
+
+# tripsacum_latifolium
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0131/AN21TNTL0131_CKDL210009737-1a-AK6512-AK6678_H5C7LDSX2_L3_1.fq.gz
+
+# tripsacum_laxum
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL002/MCRTL002_CKDL200164854-1a-AK4939-AK6653_HMGJWDSXY_L4_1.fq.gz
+
+# tripsacum_maizar
+iget /ibl/home/RawSeqData/WGS/Zea/Novo_GxE/C202SC18050023_1/raw_data/CT18N042/CT18N042_USPD16086747-GB04_HM3CYCCXY_L6_1.fq.gz
+
+# tripsacum_peruvianum
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS47/AN21TS47_CKDL210002324-1a-AK5143-AK6694_HVGWVDSXY_L4_1.fq.gz
+
+# tripsacum_pilosum
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0132/AN21TNTL0132_CKDL210009737-1a-AK6518-AK6688_H5C7LDSX2_L3_1.fq.gz
+
+# tripsacum_hirsutum
+iget /ibl/home/RawSeqData/WGS/andropogoneae/DBGG6/12192_7877_129856_DBGG6_AN21TS45_GGTCACGA_GTATTATG_R1.fastq.gz
+
+# tripsacum_zopilotense
+iget /ibl/home/RawSeqData/WGS/andropogoneae/C202SC17121429/raw_data/T223P0001/T223P0001_USPD16083894-AK706_HJ3CGCCXY_L8_1.fq.gz
+
+# zea_nicaraguensis
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL012/MCRTL012_CKDL200164854-1a-AK4940-AK6663_HMGJWDSXY_L4_1.fq.gz
+
+# andropogon_amethystinus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F002/raw_data/AN20T168/AN20T168_CKDL200169515-1a-AK5150-AK6717_HLTF5DSXY_L3_1.fq.gz
+# andropogon_andringitrensis
+# andropogon_appendiculatus
+# andropogon_bicornis
+# andropogon_brachystachyus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS04/AN21TS04_CKDL210002323-1a-AK6503-AK6657_HVGWVDSXY_L3_1.fq.gz
+# andropogon_campestris
+# andropogon_capillipes
+# andropogon_cf. lateralis
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS52/AN21TS52_CKDL210002325-1a-AK4940-AK6663_HVH5NDSXY_L3_1.fq.gz
+# andropogon_cf. macrothrix
+# andropogon_cf. ternatus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS54/AN21TS54_CKDL210002325-1a-AK5158-AK6684_HVH5NDSXY_L3_1.fq.gz
+
+# andropogon_cf. virgatus
+# andropogon_chinensis
+# andropogon_eucomus ssp. huillensis
+# andropogon_floridanus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F003/raw_data/AN21TS24/AN21TS24_CKDL210002323-1a-AK6527-AK6701_HVGWVDSXY_L3_1.fq.gz
+# andropogon_gayanus var. bisquamulatus
+# andropogon_gayanus var. polycladus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0073/AN21TNTL0073_CKDL210009737-1a-AK5159-AK6654_H5C7LDSX2_L3_1.fq.gz
+# andropogon_gerardii
+# andropogon_glaucophyllus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0105/AN21TNTL0105_CKDL210009736-1a-AK4947-AK6661_H5C7LDSX2_L2_1.fq.gz
+# andropogon_greenwayi
+# andropogon_heterantherus
+# andropogon_huillensis
+iget 	/ibl/home/RawSeqData/WGS/andropogoneae/X202SC19101387-Z01-F002/raw_data/AN20N236/AN20N236_CKDL200149284-1a-AK4994-AK9964_HNLFVDSXX_L3_1.fq.gz
+# andropogon_ibityensis
+# andropogon_ingratus
+# andropogon_itremoensis
+# andropogon_ivohibensis
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F002/raw_data/AN20T036/AN20T036_CKDL200169516-1a-AK4007-AK6728_HLTF5DSXY_L4_1.fq.gz
+# andropogon_ivorensis
+# andropogon_kelleri
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL046/MCRTL046_CKDL200164855-1B-AK6529-AK6708_HMJV7DSXY_L3_1.fq.gz
+# andropogon_lehmannii
+# andropogon_leprodes
+# andropogon_leucostachyus
+# andropogon_lima
+# andropogon_lindmanii
+iget /ibl/home/RawSeqData/WGS/andropogoneae/DC3NY/12435_7877_136096_DC3NY_AN21TNTL0143_ACTCGTGT_ATTGGAAC_R1.fastq.gz
+# andropogon_lividus
+# andropogon_longiberbis
+# andropogon_perligulatus
+# andropogon_pringlei
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC21031385-Z01-F002/raw_data/AN21TNTL0075/AN21TNTL0075_CKDL210009737-1a-AK5845-AK6676_H5C7LDSX2_L3_1.fq.gz
+# andropogon_pseudopricus
+# andropogon_pumilus
+# andropogon_reedii
+# andropogon_schirensis
+# andropogon_selloanus
+# andropogon_spp.
+# andropogon_ternarius
+# andropogon_textilis
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20082920-Z01-F002/raw_data/MCRTL044/MCRTL044_CKDL200164855-1B-AK5142-AK6697_HMJV7DSXY_L3_1.fq.gz
+# andropogon_trichozygus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC19101387-Z01-F002/raw_data/AN20N240/AN20N240_CKDL200149284-1a-AK1853-AK9964_HNLFVDSXX_L3_1.fq.gz
+# andropogon_tricozygus
+iget /ibl/home/RawSeqData/WGS/andropogoneae/X202SC20102246-Z01-F002/raw_data/AN20T035/AN20T035_CKDL200169516-1a-AK5150-AK6717_HLTF5DSXY_L4_1.fq.gz
+# andropogon_virginicus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# All tripsacum lines
+imeta qu -d organism like '%Tripsacum%' and filetype = 'fastq' and instrument_model like '%NovaSeq%' > taxa_tripsacum.txt
+
+# All andropogon lines
+imeta qu -d organism like '%Andropogon%' and filetype = 'fastq' and instrument_model like '%NovaSeq%' > taxa_andropogon.txt
+
+
+
+# Download every andropogon genome
+
+# Works
+iquest "%s/%s" "select COLL_NAME,DATA_NAME where META_DATA_ATTR_VALUE like '%Andropogon%' and DATA_NAME like '%fq%'"
+
+# Does not work
+iquest "%s/%s" "select COLL_NAME,DATA_NAME where META_DATA_ATTR_VALUE like '%Andropogon%' and META_DATA_ATTR_VALUE like 'Illumina%' and DATA_NAME like '%fq%'" 
+
+
+iquest --no-page "%s/%s" "select COLL_NAME,DATA_NAME where META_DATA_ATTR_NAME like 'cultivar' and META_DATA_ATTR_VALUE like 'SEED%' and META_DATA_ATTR_NAME like 'library_layout' and META_DATA_ATTR_VALUE like 'Paired'"
+
+
+iquest "select COLL_NAME, DATA_NAME where META_DATA_ATTR_VALUE like '%Andropogon%' and DATA_NAME like '%fq%' and DATA_NAME '%Illumina NovaSeq 6000%'"
+
+META_DATA_ATTR_NAME
 
 # -------------------------------------
 # change names to something more intitiutive
@@ -154,3 +310,102 @@ mv MCRTL064_CKDL200164856-1B-AK5149-AK6716_HMJV7DSXY_L4_2.fq.gz hyparrhenia_invo
 # Andropogon longiberbis
 mv MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_1.fq.gz andropogon_longiberbis_1.fq.gz
 mv MCRTL068_CKDL200164856-1B-AK6532-AK6712_HMJV7DSXY_L4_2.fq.gz andropogon_longiberbis_2.fq.gz
+
+# ----------------------
+# Batch 2
+# ----------------------
+
+
+# Tripsacum andersonii --> start downloading from here
+mv T204P0001_USPD16083893-AK4248_HKYCFCCXY_L2_1.fq.gz tripsacum_andersonii.fq.gz
+
+# Tripsacum australe
+mv AN21TS45_CKDL210002324-1a-AK5154-AK6672_HVGWVDSXY_L4_1.fq.gz tripsacum_australe.fq.gz
+
+# tripsacum_cundinamarcae
+mv T207P0001_USPD16083893-AK4977_HKYCFCCXY_L2_1.fq.gz tripsacum_cundinamarcae.fq.gz
+
+# tripsacum_dactyloides
+mv AN20N047_CKDL200149282-1a-AK4982-7UDI938_HNLFVDSXX_L1_1.fq.gz tripsacum_dactyloides.fq.gz
+
+# tripsacum_dactyloides_meridionale
+mv T006P0002_USPD16083893-AK4972_HKYCFCCXY_L2_1.fq.gz tripsacum_dactyloides_meridionale.fq.gz
+
+# tripsacum_intermedium
+mv T210P0001_USPD16083893-AK1953_HKYCFCCXY_L2_1.fq.gz tripsacum_intermedium.fq.gz
+
+# tripsacum_jalapense
+mv AN21TS13_CKDL210002323-1a-AK1412-AK6371_HVGWVDSXY_L3_1.fq.gz tripsacum_jalapense.fq.gz
+
+# tripsacum_lanceilatum
+mv AN21TS48_CKDL210002324-1a-AK5156-AK6704_HVGWVDSXY_L4_1.fq.gz tripsacum_lanceilatum.fq.gz
+
+# tripsacum_latifolium
+mv AN21TNTL0131_CKDL210009737-1a-AK6512-AK6678_H5C7LDSX2_L3_1.fq.gz tripsacum_latifolium.fq.gz
+
+# tripsacum_laxum
+mv MCRTL002_CKDL200164854-1a-AK4939-AK6653_HMGJWDSXY_L4_1.fq.gz tripsacum_laxum.fq.gz
+
+# tripsacum_maizar
+iget CT18N042_USPD16086747-GB04_HM3CYCCXY_L6_1.fq.gz tripsacum_maizar.fq.gz
+
+# tripsacum_peruvianum
+mv AN21TS47_CKDL210002324-1a-AK5143-AK6694_HVGWVDSXY_L4_1.fq.gz tripsacum_peruvianum.fq.gz
+
+# tripsacum_pilosum
+mv AN21TNTL0132_CKDL210009737-1a-AK6518-AK6688_H5C7LDSX2_L3_1.fq.gz tripsacum_pilosum.fq.gz
+
+# tripsacum_hirsutum
+mv 12192_7877_129856_DBGG6_AN21TS45_GGTCACGA_GTATTATG_R1.fastq.gz tripsacum_hirsutum.fq.gz
+
+# tripsacum_zopilotense
+mv T223P0001_USPD16083894-AK706_HJ3CGCCXY_L8_1.fq.gz tripsacum_zopilotense.fq.gz
+
+# zea_nicaraguensis
+mv MCRTL012_CKDL200164854-1a-AK4940-AK6663_HMGJWDSXY_L4_1.fq.gz zea_nicaraguensis.fq.gz
+
+# andropogon_amethystinus
+mv AN20T168_CKDL200169515-1a-AK5150-AK6717_HLTF5DSXY_L3_1.fq.gz andropogon_amethystinus.fq.gz
+
+# andropogon_brachystachyus
+mv AN21TS04_CKDL210002323-1a-AK6503-AK6657_HVGWVDSXY_L3_1.fq.gz andropogon_brachystachyus.fq.gz
+
+# andropogon_cf. lateralis
+mv AN21TS52_CKDL210002325-1a-AK4940-AK6663_HVH5NDSXY_L3_1.fq.gz andropogon_cf_lateralis.fq.gz
+
+# andropogon_cf. ternatus
+mv AN21TS54_CKDL210002325-1a-AK5158-AK6684_HVH5NDSXY_L3_1.fq.gz andropogon_cf_ternatus.fq.gz
+
+# andropogon_floridanus
+mv AN21TS24_CKDL210002323-1a-AK6527-AK6701_HVGWVDSXY_L3_1.fq.gz andropogon_floridanus.fq.gz
+
+# andropogon_gayanus var. polycladus
+mv AN21TNTL0073_CKDL210009737-1a-AK5159-AK6654_H5C7LDSX2_L3_1.fq.gz andropogon_gayanus_polycladus.fq.gz
+
+# andropogon_glaucophyllus
+mv AN21TNTL0105_CKDL210009736-1a-AK4947-AK6661_H5C7LDSX2_L2_1.fq.gz andropogon_glaucophyllus.fq.gz
+
+# andropogon_huillensis
+mv AN20N236_CKDL200149284-1a-AK4994-AK9964_HNLFVDSXX_L3_1.fq.gz andropogon_huillensis.fq.gz
+
+# andropogon_ivohibensis
+mv AN20T036_CKDL200169516-1a-AK4007-AK6728_HLTF5DSXY_L4_1.fq.gz andropogon_ivohibensis.fq.gz
+
+# andropogon_kelleri
+mv MCRTL046_CKDL200164855-1B-AK6529-AK6708_HMJV7DSXY_L3_1.fq.gz andropogon_kelleri.fq.gz
+
+# andropogon_lindmanii
+mv 12435_7877_136096_DC3NY_AN21TNTL0143_ACTCGTGT_ATTGGAAC_R1.fastq.gz andropogon_lindmanii.fq.gz
+
+# andropogon_pringlei
+mv AN21TNTL0075_CKDL210009737-1a-AK5845-AK6676_H5C7LDSX2_L3_1.fq.gz andropogon_pringlei.fq.gz
+
+# andropogon_textilis
+mv MCRTL044_CKDL200164855-1B-AK5142-AK6697_HMJV7DSXY_L3_1.fq.gz andropogon_textilis.fq.gz
+
+# andropogon_trichozygus
+mv AN20N240_CKDL200149284-1a-AK1853-AK9964_HNLFVDSXX_L3_1.fq.gz andropogon_trichozygus.fq.gz
+
+# andropogon_tricozygus
+mv AN20T035_CKDL200169516-1a-AK5150-AK6717_HLTF5DSXY_L4_1.fq.gz andropogon_tricozygus.fq.gz
+
