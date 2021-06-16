@@ -61,6 +61,24 @@ skmer \
     -o /workdir/hackathon/skmer_results/jc-dist-mat-pandand16_1m
 
 
+# -------------------------------------------
+# Run skmer on 1M random reads + new genomes
+# -------------------------------------------
 
+# Create a reference 
+skmer \
+    reference \
+    /workdir/hackathon/seq3 \
+    -p 20 \
+    -l /workdir/hackathon/skmer_results/panand16results_1m_plus_new \
+    -o /workdir/hackathon/skmer_results/panand_skmer_16_genomes_1m_plus_new
+
+# Compute distances
+skmer \
+    distance \
+    /workdir/hackathon/skmer_results/panand16results_1m_plus_new \
+    -t \
+    -p 20 \
+    -o /workdir/hackathon/skmer_results/jc-dist-mat-pandand16_1m_plus_new
 
 

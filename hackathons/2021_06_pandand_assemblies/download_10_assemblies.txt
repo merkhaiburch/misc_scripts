@@ -347,7 +347,7 @@ mv AN21TNTL0131_CKDL210009737-1a-AK6512-AK6678_H5C7LDSX2_L3_1.fq.gz tripsacum_la
 mv MCRTL002_CKDL200164854-1a-AK4939-AK6653_HMGJWDSXY_L4_1.fq.gz tripsacum_laxum.fq.gz
 
 # tripsacum_maizar
-iget CT18N042_USPD16086747-GB04_HM3CYCCXY_L6_1.fq.gz tripsacum_maizar.fq.gz
+mv CT18N042_USPD16086747-GB04_HM3CYCCXY_L6_1.fq.gz tripsacum_maizar.fq.gz
 
 # tripsacum_peruvianum
 mv AN21TS47_CKDL210002324-1a-AK5143-AK6694_HVGWVDSXY_L4_1.fq.gz tripsacum_peruvianum.fq.gz
@@ -376,7 +376,7 @@ mv AN21TS52_CKDL210002325-1a-AK4940-AK6663_HVH5NDSXY_L3_1.fq.gz andropogon_cf_la
 # andropogon_cf. ternatus
 mv AN21TS54_CKDL210002325-1a-AK5158-AK6684_HVH5NDSXY_L3_1.fq.gz andropogon_cf_ternatus.fq.gz
 
-# andropogon_floridanus
+# andropogon_floridanus --> rename from here
 mv AN21TS24_CKDL210002323-1a-AK6527-AK6701_HVGWVDSXY_L3_1.fq.gz andropogon_floridanus.fq.gz
 
 # andropogon_gayanus var. polycladus

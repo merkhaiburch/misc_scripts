@@ -53,3 +53,23 @@ plot(my_nj_1m, "phylogram")
 my_nj_rooted_1m <- ape::root(my_nj_1m,7:8) # check columns for correct root
 plot(my_nj_rooted_1m, "phylogram")
 
+
+
+# --------------------
+# Plot 1M + mew gemomes read tree
+# --------------------
+
+skmer1m_plus_new <- read.table("~/Downloads/panand_skmer_16_genomes_1m_plus_new.txt", header = TRUE) %>% as.matrix()
+
+# Change rownames
+rownames(skmer1m_plus_new) <- skmer1m_plus_new[,1]
+skmer1m_plus_new <- skmer1m_plus_new[,-1]
+
+# Format matrix using ape
+my_nj_1m_plus_new <- ape::njs(skmer1m_plus_new)
+
+# Plot as a rooted tree
+my_nj_rooted_1m_plus_new <- ape::root(my_nj_1m_plus_new,7:8) # check columns for correct root
+plot(my_nj_rooted_1m_plus_new, "phylogram")
+
+
