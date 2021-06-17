@@ -10,7 +10,6 @@
 #   - Use PHG imputed SNPs for:
 #   - 1) genome wide SNPs 2) SNPs only within specific intervals
 # ---------------------------------------------------------------
-cp -R /home/mbb262/bioinformatics/tassel-5-standalone /workdir/mbb262
 
 # --------------------
 #  NAM SNPs and GRM
@@ -21,8 +20,12 @@ bgzip -c /workdir/ag2484/NAM_phg_snps.vcf > /workdir/mbb262/NAM_phg_snps.vcf.gz
 tabix -p vcf /workdir/mbb262/NAM_phg_snps.vcf.gz
 
 # loop extract's each chromosome's info
-tabix myvcf.vcf.gz chr1 > chr1.vcf
-
+for CHROM in {1..10}
+do
+    echo "Start analyzing chromosome ${CHROM}"
+    tabix /workdir/mbb262/NAM_phg_snps.vcf.gz chr${CHROM} > nam_chr${CHROM}.vcf
+    echo "End analyzing chromosome ${CHROM}"
+done
 
 # Filter data using tassel using MAF then randomly subset 10M sites genome wide
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
@@ -68,8 +71,19 @@ tabix myvcf.vcf.gz chr1 > chr1.vcf
     -exportType VCF
 
 # Randomly subsample snps (might need to unzip)
-gunzip filtered_goodman_phg_snps.vcf.gz
-shuf -n 15000 filtered_goodman_phg_snps.vcf > subsampled_10M_filtered_goodman_phg_snps.vcf
+plink \
+    --bfile filtered_goodman_phg_snps.vcf \
+    --recode \
+    --out filtered_goodman_phg_snps_recoded.vcf
+
+# Extract snps column
+cut -f 2 file2.map > snps.map
+
+# Choose 15k SNPs
+shuf -n 15000 snps.map > snps.subset.map
+
+# Extract those SNPs from your first file
+plink --bfile file1 --extract snps.subset.map --make-bed --out file3
 
 
 # calculate kinship genome wide using a subsetted vcf
