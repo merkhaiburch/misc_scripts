@@ -58,7 +58,7 @@ done
 #  282 SNPs and GRM
 # --------------------
 
-# Filter data using tassel using MAF then randomly subset 10M sites genome wide
+# Filter data using tassel using MAF 
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
     -debug /workdir/mbb262/goodman_downsample_debug.log \
     -Xmx500g \
@@ -69,6 +69,33 @@ done
     -filterAlignMaxFreq 0.99 \
     -export /workdir/mbb262/filtered_goodman_phg_snps.vcf.gz \
     -exportType VCF
+
+
+# randomly subset 10M sites genome wide using jvarkit/downsamplevcf
+java -jar /home/mbb262/bioinformatics/jvarkit/dist/downsamplevcf.jar \
+    /workdir/mbb262/filtered_goodman_phg_snps.vcf \
+    -o downsampled_10M_filtered_goodman_phg_snps.vcf.gz \
+    -n 10000000
+
+bcftools view --header-only /workdir/mbb262/filtered_goodman_phg_snps.vcf > subsample_goodman.vcf
+bcftools view --no-header input.vcf | awk '{printf("%f\t%s\n",rand(),$0);}' | sort -t $'\t' -k1,1g | cut -f2-  | head -n 1000 >>  subsample.vcf
+
+# calculate kinship genome wide using a subsetted vcf
+/home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
+    -debug /workdir/mbb262/goodman_calc_grm_debug.log \
+    -Xmx500g \
+    -maxThreads 60 \
+    -importGuess /workdir/mbb262/subsampled_10M_filtered_goodman_phg_snps.vcf -noDepth \
+    -KinshipPlugin \
+    -method Centered_IBS \
+    -endPlugin \
+    -export /workdir/mbb262/kinship_filtered_goodman_phg_snps.vcf
+
+
+
+# Other methods that I don;t know how to use
+# Randomly subsample snps
+shuf -n 15000 snps_file.vcf
 
 # Randomly subsample snps (might need to unzip)
 plink \
@@ -84,21 +111,6 @@ shuf -n 15000 snps.map > snps.subset.map
 
 # Extract those SNPs from your first file
 plink --bfile file1 --extract snps.subset.map --make-bed --out file3
-
-
-# calculate kinship genome wide using a subsetted vcf
-/home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
-    -debug /workdir/mbb262/goodman_calc_grm_debug.log \
-    -Xmx500g \
-    -maxThreads 60 \
-    -importGuess /workdir/mbb262/subsampled_10M_filtered_goodman_phg_snps.vcf -noDepth \
-    -KinshipPlugin \
-    -method Centered_IBS \
-    -endPlugin \
-    -export /workdir/mbb262/kinship_filtered_goodman_phg_snps.vcf
-
-# Randomly subsample snps
-shuf -n 15000 snps_file.vcf
 
 
 
