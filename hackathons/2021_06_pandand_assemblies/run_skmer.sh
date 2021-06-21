@@ -15,30 +15,31 @@ export PATH=/programs/jellyfish-2.3.0/bin:$PATH
 export PATH=/programs/mash-Linux64-v2.1:$PATH
 export PATH=/programs/seqtk:$PATH
 
-# test to see if the paths were added
-jellyfish --version
-mash --version
-seqtk
-
 
 # -------------------------------
-# Run skmer on 100k random reads
+# Run skmer generic names
 # -------------------------------
 
 # Create a reference 
 skmer \
     reference \
-    /workdir/hackathon/subsampled_seq2 \
-    -p 20 \
-    -l /workdir/hackathon/skmer_results/panand16results \
-    -o /workdir/hackathon/skmer_results/panand_skmer_16_genomes
+    dir_with_all_subsampled_unzipped_fa_files \
+    -p num_threads \
+    -l /skmer_results/output_library_name \
+    -o /skmer_results/output_prefix
 
 # Compute distances
 skmer \
     distance \
-    /workdir/hackathon/skmer_results/panand16results \
+    /skmer_results/output_library_name \
     -t \
-    -o /workdir/hackathon/skmer_results/jc-dist-mat-pandand16
+    -o /skmer_results/jc-dist-mat
+
+# Compare new seqeunces to the reference library
+skmer \
+    query \
+    new_query_file.fastq \
+    output_library_name
 
 
 # -------------------------------
