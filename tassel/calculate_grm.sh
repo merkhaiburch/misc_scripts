@@ -70,7 +70,7 @@ done
     -export /workdir/mbb262/filtered_goodman_phg_snps.vcf.gz \
     -exportType VCF
 
-
+# Other non-functional code
 # randomly subset 10M sites genome wide using jvarkit/downsamplevcf
 java -jar /home/mbb262/bioinformatics/jvarkit/dist/downsamplevcf.jar \
     /workdir/mbb262/filtered_goodman_phg_snps.vcf \
@@ -85,32 +85,12 @@ bcftools view --no-header input.vcf | awk '{printf("%f\t%s\n",rand(),$0);}' | so
     -debug /workdir/mbb262/goodman_calc_grm_debug.log \
     -Xmx500g \
     -maxThreads 60 \
-    -importGuess /workdir/mbb262/subsampled_10M_filtered_goodman_phg_snps.vcf -noDepth \
+    -importGuess /workdir/mbb262/filtered_goodman_phg_snps.vcf.gz -noDepth \
     -KinshipPlugin \
     -method Centered_IBS \
     -endPlugin \
-    -export /workdir/mbb262/kinship_filtered_goodman_phg_snps.vcf
-
-
-
-# Other methods that I don;t know how to use
-# Randomly subsample snps
-shuf -n 15000 snps_file.vcf
-
-# Randomly subsample snps (might need to unzip)
-plink \
-    --bfile filtered_goodman_phg_snps.vcf \
-    --recode \
-    --out filtered_goodman_phg_snps_recoded.vcf
-
-# Extract snps column
-cut -f 2 file2.map > snps.map
-
-# Choose 15k SNPs
-shuf -n 15000 snps.map > snps.subset.map
-
-# Extract those SNPs from your first file
-plink --bfile file1 --extract snps.subset.map --make-bed --out file3
+    -export /workdir/mbb262/kinship_filtered_goodman_phg_snps.txt \
+    -exportType Table
 
 
 
