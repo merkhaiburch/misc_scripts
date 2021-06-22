@@ -32,7 +32,7 @@
     -export /workdir/mbb262/filtered_NAM_phg_snps.vcf \
     -exportType VCF
 
-gzip /workdir/mbb262/filtered_NAM_phg_snps.vcf
+bgzip --threads 80 /workdir/mbb262/filtered_NAM_phg_snps.vcf
 
 # calculate kinship genome wide using a subsetted vcf
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
@@ -91,9 +91,10 @@ bgzip --threads 80 /workdir/mbb262/filtered_hare_nam_phg_snps.vcf
     -filterAlign \
     -filterAlignMinFreq 0.01 \
     -filterAlignMaxFreq 0.99 \
-    -export /workdir/mbb262/filtered_goodman_phg_snps.vcf.gz \
+    -export /workdir/mbb262/filtered_goodman_phg_snps.vcf \
     -exportType VCF
 
+bgzip --threads 60 /workdir/mbb262/filtered_goodman_phg_snps.vcf
 
 # calculate kinship genome wide using a subsetted vcf
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
@@ -126,18 +127,18 @@ bgzip --threads 80 /workdir/mbb262/filtered_hare_nam_phg_snps.vcf
     -export /workdir/mbb262/filtered_hare_goodman_phg_snps.vcf \
     -exportType VCF
 
-gzip /workdir/mbb262/filtered_hare_goodman_phg_snps.vcf
+bgzip --threads 60 /workdir/mbb262/filtered_hare_goodman_phg_snps.vcf
 
 # calculate kinship genome wide using a subsetted vcf
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
-    -debug /workdir/mbb262/goodman_hare_calc_grm_debug.log \
+    -debug /workdir/mbb262/complete_grms_goodman/goodman_hare_calc_grm_debug.log \
     -Xmx500g \
     -maxThreads 60 \
     -importGuess /workdir/mbb262/filtered_hare_goodman_phg_snps.vcf.gz -noDepth \
     -KinshipPlugin \
     -method Centered_IBS \
     -endPlugin \
-    -export /workdir/mbb262/kinship_filtered_goodman_hare_phg_snps.txt
+    -export /workdir/mbb262/complete_grms_goodman/kinship_filtered_goodman_hare_phg_snps.txt
 
 
 
