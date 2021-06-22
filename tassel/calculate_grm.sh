@@ -52,30 +52,30 @@ gzip /workdir/mbb262/filtered_NAM_phg_snps.vcf
 #  NAM SNPs and GRM --> HARE regions only
 # -----------------------------------------
 
-# bed file from HARE genes in v3, filtering SNPs within these intervals
-# Filter data using tassel using MAF 
-/home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
-    -debug /workdir/mbb262/nam_hare_downsample_debug.log \
-    -Xmx1000g \
-    -maxThreads 86 \
-    -importGuess /workdir/workdir/NAM_phg_snps.vcf -noDepth \
-    -FilterSiteBuilderPlugin \
-    -siteMinAlleleFreq 0.01 \
-    -siteMaxAlleleFreq 0.99 \
-    -removeSitesWithIndels true \
-    -bedFile ./hare_v5_intervals.bed \
-    -endPlugin \
-    -export /workdir/mbb262/filtered_hare_nam_phg_snps.vcf \
-    -exportType VCF
+# # bed file from HARE genes in v3, filtering SNPs within these intervals
+# # Filter data using tassel using MAF 
+# /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
+#     -debug /workdir/mbb262/nam_hare_downsample_debug.log \
+#     -Xmx1000g \
+#     -maxThreads 86 \
+#     -importGuess /workdir/workdir/NAM_phg_snps.vcf -noDepth \
+#     -FilterSiteBuilderPlugin \
+#     -siteMinAlleleFreq 0.01 \
+#     -siteMaxAlleleFreq 0.99 \
+#     -removeSitesWithIndels true \
+#     -bedFile ./hare_v5_intervals.bed \
+#     -endPlugin \
+#     -export /workdir/mbb262/filtered_hare_nam_phg_snps.vcf \
+#     -exportType VCF
 
-gzip /workdir/mbb262/filtered_hare_nam_phg_snps.vcf
+# gzip /workdir/mbb262/filtered_hare_nam_phg_snps.vcf
 
 # calculate kinship genome wide using a subsetted vcf
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
     -debug /workdir/mbb262/nam_hare_calc_grm_debug.log \
     -Xmx1000g \
     -maxThreads 86 \
-    -importGuess /workdir/mbb262/NAM_phg_snps.vcf.gz -noDepth \
+    -importGuess /workdir/mbb262/filtered_NAM_phg_snps.vcf.gz -noDepth \
     -KinshipPlugin \
     -method Centered_IBS \
     -endPlugin \
