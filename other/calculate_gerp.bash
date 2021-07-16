@@ -20,7 +20,15 @@ export PATH=/programs/GERPplusplus:$PATH
 gerpelem -h
 
 # Generate scores
-gerpelem \
-    -f Zea_mays.allChr.rates \
-    -x kistler_gerp2 \
-    -v
+gerpelem -f Zea_mays.allChr.rates -v
+
+
+# log file
+gpp-gerpelem
+Thu Jul 15 13:24:38 EDT 2021
+processing file Zea_mays.allChr.rates containing 398381696 position scores
+median neutral rate is 5.41
+0 non-border shallow positions excluded
+terminate called after throwing an instance of 'std::bad_alloc'
+  what():  std::bad_alloc
+Aborted (core dumped)
