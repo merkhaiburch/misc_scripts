@@ -13,5 +13,5 @@
 
 for FILE in *_processed.csv.gz
 do
-    bgzip -d --threads 36 ${FILE}
+    bgzip -d --threads 100 ${FILE}
 done
