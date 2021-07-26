@@ -10,8 +10,15 @@
 #   - bgzip does not support globbing (i.e. bgzip *.gz)
 # ---------------------------------------------------------------
 
-
+# unzip
 for FILE in *_processed.csv.gz
 do
     bgzip -d --threads 100 ${FILE}
+done
+
+
+# zip
+for FILE in *.txt
+do
+    bgzip --threads 30 ${FILE}
 done
