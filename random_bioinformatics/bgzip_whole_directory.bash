@@ -22,3 +22,9 @@ for FILE in *.txt
 do
     bgzip --threads 30 ${FILE}
 done
+
+# index file (for bcftools) using bcftools
+for FILE in *.vcf.gz
+do
+    bcftools index --threads 20 ${FILE}
+done
