@@ -1,0 +1,9 @@
+Tips for setting up Neo4j and neo4r on a Mac
+
+- Download Neo4j server community edition
+- Unzip package, move to any folder but Applications folder (Documents is a ok choice)
+- Comment out line 22 in /neo4j-community-4.1.0/conf/neo4j.conf, it looks like this #dbms.directories.import=import
+-		above change will allow neo4j to load external files like csv files into cb
+- Change line 241 in same .conf file the start of the line looks like this, change from 1 days to 3 files
+# Retention policy for transaction logs needed to perform recovery and backups.
+dbms.tx_log.rotation.retention_policy=3 files
