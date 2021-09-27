@@ -5,7 +5,7 @@ Proceed with caution, you're venturing into no (wo)man's land....
 
 # Contact
 
-Name: Merritt Burch
+Name: Merritt Khaipho-Burch
 
 Email: mbb262@cornell.edu
 
