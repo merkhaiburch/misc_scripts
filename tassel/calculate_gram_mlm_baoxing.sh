@@ -39,7 +39,7 @@ done
 
 # combine subsetted files (see if works better)
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
-  -debug /workdir/mbb262/nam/debug_merge_vcf_nam.log \
+  -debug /workdir/mbb262/nam/debug_merge_vcf_nam_subset.log \
   -Xmx1020g \
   -maxThreads 87 \
   -fork1 -importGuess /workdir/mbb262/nam/subset_nam_snps_chr1.imputed.vcf -noDepth \
@@ -54,11 +54,11 @@ done
   -fork10 -importGuess /workdir/mbb262/nam/subset_nam_snps_chr10.imputed.vcf -noDepth \
   -combine11 -input1 -input2 -input3 -input4 -input5 -input6 -input7 -input8 -input9 -input10 \
   -mergeGenotypeTables \
-  -export /workdir/mbb262/nam/nam_combined_all_chroms.vcf \
+  -export /workdir/mbb262/nam/subset_nam_combined_all_chroms.vcf \
   -exportType VCF
 
 # zip file
-bgzip --threads 87 /workdir/mbb262/nam/nam_combined_all_chroms.vcf
+bgzip --threads 87 /workdir/mbb262/nam/subset_nam_combined_all_chroms.vcf
 
 
 # combine subsetted vcf files
