@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+set \
+  -o errexit \
+  -o nounset \
+  -o pipefail
+
 # ---------------------------------------------------------------
 # Author.... Merritt Khaipho-Burch
 # Contact... mbb262@cornell.edu
