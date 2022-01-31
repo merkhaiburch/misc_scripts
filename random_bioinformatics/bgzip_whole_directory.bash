@@ -11,9 +11,9 @@
 # ---------------------------------------------------------------
 
 # unzip
-for FILE in *_processed.csv.gz
+for FILE in *.gz
 do
-    bgzip -d --threads 100 ${FILE}
+    bgzip -d --threads 30 ${FILE}
 done
 
 
