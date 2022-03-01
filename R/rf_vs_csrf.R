@@ -19,17 +19,22 @@ library(ranger)
 library(caret)
 library(ggplot2)
 
+
 # ------------------------------------------
-# Use Iris dataset for regular random forest
+# Split into training and testing sets
 # ------------------------------------------
 
-# Split into training and testing sets
 index <- caret::createDataPartition(iris$Species, p=0.80, list=FALSE)
 testset <- iris[-index,] # testing 20%
 trainset <- iris[index,] #training 80%
 
+
+# ------------------------------------------
+# Use Iris dataset for regular random forest
+# ------------------------------------------
+
 # Regular random forest
-iris_rf <- ranger::ranger(Species ~ ., data = trainset, importance = 'impurity')
+iris_rf <- ranger::ranger(Sepal.Length ~ ., data = trainset, importance = 'impurity')
 
 # Extract relative importance of variables 
 importance_iris_rf <- data.frame(iris_rf$variable.importance/max(iris_rf$variable.importance))
@@ -42,15 +47,37 @@ importance_iris_rf %>%
   ggplot(aes(x= reorder(features, relative_importance), y = relative_importance)) +
   geom_col() +
   coord_flip()
-  
+
+# Predict values
+iris_rf_values <- predict(iris_rf, testset)$predictions
+
 
 # ------------------------------------------------
 # Use Iris dataset for case-specifc random forest
 # ------------------------------------------------
 
 # Case specific random forest
-iris_case <- ranger::csrf(Species ~ ., 
+iris_case <- ranger::csrf(Sepal.Length ~ ., 
                           training_data = trainset,
                           test_data = testset,
                           params1 = list(num.trees = 50, mtry = 4), 
                           params2 = list(num.trees = 5))
+
+
+# ------------------------------------------------
+# Compare the distributions of predicted values
+# ------------------------------------------------
+
+# Compare the distributions of regular random forest and case specific
+model_comparisons <- cbind(iris[,5], data.frame(iris_rf_values), data.frame(iris_case))
+colnames(model_comparisons) <- c("species", "rf", "csrf")
+
+# Correlate values
+cor(model_comparisons$rf, model_comparisons$csrf)
+
+# Plot predictions against each other
+ggplot(aes(x = rf, y = csrf), data = model_comparisons) +
+  geom_point() +
+  geom_smooth()
+
+
