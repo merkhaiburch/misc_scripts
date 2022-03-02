@@ -29,7 +29,7 @@ midway_pcs <- data.table::fread("~/Downloads/workdir/mbb262/03_pcs/nam/midwayGen
 # variables
 j <- 1
 p <- 1
-
+perm <- 1
 
 # Iterate through phenotypes
 pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
@@ -71,37 +71,38 @@ pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
     colnames(y_hat_midway)[2] <- trait_ids[p]
     colnames(residual_y_midway)[2] <- trait_ids[p]
     
+    # collect values outside of loop
+    perm_adjusted_y_hat_main <- pheno_main_pcs[,1]
+    perm_adjusted_y_hat_midway <- pheno_midway_pcs[,1]
+    
     # Permute trait 10X times
-    temp <- lapply(seq_len(10), function(perm) {
+    for (perm in seq_len(10)){
+      # temp <- lapply(seq_len(10), function(perm) {
       message("Permutation: ", perm)
       
       # Create an order to permute traits with
       sample_order <- data.frame("Taxa" = sample(residual_y_main$Taxa))
       
-      # Collect phenotypes
-      perm_adjusted_y_hat_main <- pheno_main_pcs[,1] %>% data.frame()
-      perm_adjusted_y_hat_midway <- pheno_midway_pcs[,1] %>% data.frame()
-      
       # subsample rows in the same order between main and midway
-      residual_y_main <- residual_y_main[order(match(residual_y_main$Taxa, sample_order$Taxa)), ]
-      residual_y_midway <- residual_y_midway[order(match(residual_y_midway$Taxa, sample_order$Taxa)), ]
+      perm_df_main <- residual_y_main[order(match(residual_y_main$Taxa, sample_order$Taxa)), ]
+      perm_df_midway <- residual_y_midway[order(match(residual_y_midway$Taxa, sample_order$Taxa)), ]
       
-      # Add back y_hat
-      add_y_hat_main <- merge(perm_df, y_hat, by = "Taxa")
-      add_y_hat_main <- cbind(add_y_hat_main[,1], rowSums(add_y_hat_main[,-1]))
-      
-      add_y_hat <- merge(perm_df, y_hat, by = "Taxa")
-      add_y_hat <- cbind(add_y_hat[,1], rowSums(add_y_hat[,-1]))
+      # With permuted phenotypes, add them back to un-permuted taxa labels
+      # cbind is intentional here, the order of the adjusted y_hat is the same between the main
+      # and midway runs, cbinding to the non-permuted labels is also consistent between the new main and midway files
+      add_y_hat_main <- cbind(pheno_main_pcs[,1], (perm_df_main[,-1] + y_hat_main[,-1]))
+      add_y_hat_midway <- cbind(pheno_midway_pcs[,1], (perm_df_midway[,-1] + y_hat_midway[,-1]))
       
       # Change column names
-      colnames(add_y_hat)[2] <- paste0(trait_ids[p], "_permutation_", perm)
+      colnames(add_y_hat_main)[2] <- paste0(trait_ids[p], "_permutation_", perm)
+      colnames(add_y_hat_midway)[2] <- paste0(trait_ids[p], "_permutation_", perm)
       
-      # merge into outside list
-      perm_adjusted_y_hat <- merge(perm_adjusted_y_hat, add_y_hat, by = "taxa")
-      # return(perm_adjusted_y_hat)
-    })
+      # merge into outside df
+      perm_adjusted_y_hat_main <- merge(perm_adjusted_y_hat_main, add_y_hat_main, by = "Taxa")
+      perm_adjusted_y_hat_midway <- merge(perm_adjusted_y_hat_midway, add_y_hat_midway, by = "Taxa")
+    }
     # Combine all permutations for a single trait
-    lala <- Reduce(function(x, y) merge(x, y, by = "taxa") , temp)
+    # lala <- Reduce(function(x, y) merge(x, y, by = "taxa") , temp)
   })
   # Combine all traits and their corresponding permutations
   temp2 <- Reduce(function(x, y) merge(x, y, by = "taxa") , all_traits_perms)
@@ -127,9 +128,11 @@ sample_order
 
 # Reorder both datasets according to randomized sample order
 test1
-test1[order(match(test1$Taxa, sample_order$Taxa)), ]
+perm_test1 <- test1[order(match(test1$Taxa, sample_order$Taxa)), ]
+perm_test1
+
 test2
-test2[order(match(test2$Taxa, sample_order$Taxa)), ]
+perm_test2 <- test2[order(match(test2$Taxa, sample_order$Taxa)), ]
+perm_test2
 
-
-
+cbind(test1, perm_test1[,-1], perm_test2[,-1])
