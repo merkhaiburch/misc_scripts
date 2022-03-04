@@ -26,20 +26,14 @@ global_pcs <- data.table::fread("~/Downloads/workdir/mbb262/03_pcs/nam/ames2nam_
 main_pcs <- data.table::fread("~/Downloads/workdir/mbb262/03_pcs/nam/mainGeneWindow360_ames2nam_local_3allNAM_varaibleNumPCs_not4tassel.txt")
 midway_pcs <- data.table::fread("~/Downloads/workdir/mbb262/03_pcs/nam/midwayGeneWindow360_ames2nam_local_3allNAM_varaibleNumPCs_not4tassel.txt")
 
-# variables
-j <- 1
-p <- 1
-perm <- 1
-
-# Iterate through phenotypes
+# Iterate through phenotype files
 pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
   message("I am on phenotype file ", phenos_nam[j])
   
   # Load in phenotype file 
   phenotype <- data.table::fread(paste(phenopath_nam, phenos_nam[j], sep = ""))
-  phenotype <- phenotype[,1:3] # SUBSET JUST FOR TESTING
   
-  # Swap out semicolons in name with underscors
+  # Swap out semicolons in name with underscores
   colnames(phenotype) <- gsub(";", "_", colnames(phenotype))
   
   # Change taxa name (currently is <Trait>)
@@ -53,8 +47,13 @@ pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
   # Gather trait IDs
   trait_ids <- colnames(pheno_main_pcs[, 2:ncol(phenotype)])
   
+  # collect values outside of loop
+  perm_adjusted_y_hat_main <- phenotype[,1]
+  perm_adjusted_y_hat_midway <- phenotype[,1]
+  
   # Iterate through each phenotype file, then each trait, permute 10x
-  all_traits_perms <- lapply(seq_len(length(trait_ids)), function(p) {
+  for (p in seq_len(length(trait_ids))) {
+    # all_traits_perms <- lapply(seq_len(length(trait_ids)), function(p) {
     message("Permuting and adjusting trait: ", trait_ids[p])
     fit_main <- lm(paste(trait_ids[p], "~ ."), data = pheno_main_pcs[,-1]) #-1 removes Taxa ids
     fit_midway <- lm(paste(trait_ids[p], "~ ."), data = pheno_midway_pcs[,-1]) #-1 removes Taxa ids
@@ -70,10 +69,6 @@ pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
     colnames(residual_y_main)[2] <- trait_ids[p]
     colnames(y_hat_midway)[2] <- trait_ids[p]
     colnames(residual_y_midway)[2] <- trait_ids[p]
-    
-    # collect values outside of loop
-    perm_adjusted_y_hat_main <- pheno_main_pcs[,1]
-    perm_adjusted_y_hat_midway <- pheno_midway_pcs[,1]
     
     # Permute trait 10X times
     for (perm in seq_len(10)){
@@ -101,15 +96,15 @@ pheno_files <- lapply(seq_len(length(phenos_nam)), function(j) {
       perm_adjusted_y_hat_main <- merge(perm_adjusted_y_hat_main, add_y_hat_main, by = "Taxa")
       perm_adjusted_y_hat_midway <- merge(perm_adjusted_y_hat_midway, add_y_hat_midway, by = "Taxa")
     }
-    # Combine all permutations for a single trait
-    # lala <- Reduce(function(x, y) merge(x, y, by = "taxa") , temp)
-  })
-  # Combine all traits and their corresponding permutations
-  temp2 <- Reduce(function(x, y) merge(x, y, by = "taxa") , all_traits_perms)
+  }
   
-  # Export file
-  data.table::fwrite(temp2,
-                     paste0("~/Downloads/workdir/mbb262/phenotypes/02_permuted_fast_association_data/goodman/", phenos_good_export[j]))
+  # Export main file
+  data.table::fwrite(perm_adjusted_y_hat_main,
+                     paste0("~/Downloads/workdir/mbb262/phenotypes/02_permuted_fast_association_data/nam/main_", phenos_nam_export[j]))
+  
+  # export midway file
+  data.table::fwrite(perm_adjusted_y_hat_midway,
+                     paste0("~/Downloads/workdir/mbb262/phenotypes/02_permuted_fast_association_data/nam/midway_", phenos_nam_export[j]))
   
 })
   
