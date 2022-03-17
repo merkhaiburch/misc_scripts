@@ -13,14 +13,21 @@
 # unzip
 for FILE in *.gz
 do
-    bgzip -d --threads 30 ${FILE}
+    bgzip -d --threads 20 ${FILE}
 done
 
 
-# zip
+# zip txt file
 for FILE in *.txt
 do
-    bgzip --threads 30 ${FILE}
+    bgzip --threads 20 ${FILE}
+done
+
+
+# zip csv file
+for FILE in *.csv
+do
+    bgzip --threads 20 ${FILE}
 done
 
 
