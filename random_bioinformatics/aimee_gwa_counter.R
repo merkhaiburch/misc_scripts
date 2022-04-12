@@ -29,9 +29,10 @@ system("scp -r mbb262@cbsublfs1.biohpc.cornell.edu:/data1/users/mbb262/results/p
 
 # Intervals from:
 # cd /workdir/mbb262
-# wget https://download.maizegdb.org/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.TE.gff3.gz
-system("gunzip /workdir/mbb262/")
-v5 <- ape::read.gff("/workdir/mbb262/Zm-B73-REFERENCE-NAM-5.0/Zm-B73-REFERENCE-NAM-5.0.TE.gff3")
+# https://datacommons.cyverse.org/browse/iplant/home/maizegdb/maizegdb/B73v5_JBROWSE_AND_ANALYSES/B73v3-B73v5_and_B73v4-B73v5_gene_model_associations/B73v4_B73v5_liftoff_genemodel_CDS_xref.txt.zip
+
+# Load in interval file
+intervals <- read.table()
 
 # make file with chrom, start, stop --> no window around genes
 intervals_1
