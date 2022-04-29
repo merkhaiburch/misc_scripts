@@ -14,15 +14,13 @@
 
 library(dplyr)
 library(data.table)
+library(GenomicRanges)
 
 
 # Gather GWAS results from blfs1 --------------------------------------------
 
 # field NAM
-system("scp -r mbb262@cbsublfs1.biohpc.cornell.edu:/data1/users/mbb262/results/pleiotropy/gwa_rtassel_all_nam_traits/nam_all/processed_results/* /workdir/mbb262/results/nam") 
-
-# field goodman
-system("scp -r mbb262@cbsublfs1.biohpc.cornell.edu:/data1/users/mbb262/results/pleiotropy/gwa_results_goodman_panel/goodman_all/processed_results/* /workdir/mbb262/results/goodman")
+# scp -r mbb262@cbsublfs1.biohpc.cornell.edu:/data1/users/mbb262/results/pleiotropy/gwa_rtassel_all_nam_traits/nam_all/processed_results/* /workdir/mbb262/results/nam
 
 
 # Create intervals -----------------------------------------------------------
@@ -32,13 +30,33 @@ system("scp -r mbb262@cbsublfs1.biohpc.cornell.edu:/data1/users/mbb262/results/p
 # https://datacommons.cyverse.org/browse/iplant/home/maizegdb/maizegdb/B73v5_JBROWSE_AND_ANALYSES/B73v3-B73v5_and_B73v4-B73v5_gene_model_associations/B73v4_B73v5_liftoff_genemodel_CDS_xref.txt.zip
 
 # Load in interval file
-intervals <- read.table()
+intervals <- read.table("~/Downloads/B73v4_B73v5_liftoff_genemodel_CDS_xref.txt") %>% 
+  select(-"V5", -"V11")
+
+# Change column names
+colnames(intervals) <- c("v4_chrom", "v4_start", "v4_end", "v4_gene", "v4_strand", 
+                         "v5_chrom", "v5_start", "v5_end", "v5_gene", "v5_strand",
+                         "v5_length")
+intervals$v4_chrom <- gsub("chr", "", intervals$v4_chrom)
+intervals$v4_chrom <- as.numeric(as.character(intervals$v4_chrom))
+
+# Remove v4 genes that do not map to v5, and any v5 genes that don't map to v4
+intervals <- intervals %>% filter(v5_gene != ".")
+intervals <- intervals[complete.cases(intervals), ]
 
 # make file with chrom, start, stop --> no window around genes
-intervals_1
+intervals_1 <- intervals %>% select("v4_chrom", "v4_start", "v4_end", "v4_gene", "v4_strand")
 
 # make file with chrom, start, stop --> 5 kb window around genes
-intervals_2
+intervals_2 <- GenomicRanges::makeGRangesFromDataFrame(intervals_1, strand.field = "v4_strand")
+temp <- resize(intervals_2, width(intervals_2)-10, fix = "both")
+# temp <- resize(temp, width(temp)+10, fix = "end")
+
+intervals_2 # 34722-38366
+temp # 34712-38376
+
+intervals_2 <- intervals %>% select("v4_chrom", "v4_start", "v4_end", "v4_gene")
+temp <- intervals$v4_start-intervals$v4_end
 
 # Export without windows around genes
 write.csv(intervals_1, "/workdir/mbb262/aimee_intervals_1.csv", row.names = FALSE, quote = FALSE)
