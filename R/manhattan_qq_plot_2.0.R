@@ -39,10 +39,8 @@ plot_gwas_qq <- function(gwas_df, plot_title, plot_id) {
   a <- ggplot(don, aes(x = BPcum, y = -log10(p))) +
     geom_point(aes(colour = chr_color), size = 1) +
     scale_color_manual(values=c("grey28","grey61")) +
-    geom_hline(yintercept = -log10(0.05/15000000), color = "black", linetype = "solid") +
-    geom_hline(yintercept = -log10(5e-8), color = "black", linetype = "solid") +
+    geom_hline(yintercept = -log10(0.00001), color = "black", linetype = "solid") +
     labs(x = NULL, y = "-log10(p)", title = "y ~ SNP + management") + 
-    theme_minimal() +
     ggtitle(plot_title) +
     theme(legend.position="none",
           panel.grid.major.x = element_blank(),
@@ -61,8 +59,7 @@ plot_gwas_qq <- function(gwas_df, plot_title, plot_id) {
     geom_abline(slope = 1, intercept = 0) +
     ylim(0,15) +
     ggtitle("QQ Plot") +
-    labs(x = "-log10(Expected)", y = "-log10(Observed)") + 
-    theme_minimal()
+    labs(x = "-log10(Expected)", y = "-log10(Observed)") 
   
   # export the plot
   ggsave(paste0("~/Box Sync/Cornell_PhD/labProjects/debugging/", plot_id, ".png"),
