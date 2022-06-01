@@ -1,0 +1,9 @@
+# To be able to run a kotlin script, you need to have kotlin on your machine.  You can download  it like this:
+wget https://github.com/JetBrains/kotlin/releases/download/v1.5.31/kotlin-compiler-1.5.31.zip
+unzip kotlin-compiler-1.5.31.zip
+
+# Then unzip:
+wget https://github.com/JetBrains/kotlin/releases/download/v1.5.31/kotlin-compiler-1.5.31.zip
+unzip kotlin-compiler-1.5.31.zip
+
+# And add that to your path or your .bash_profile

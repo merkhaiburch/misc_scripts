@@ -10,11 +10,18 @@
 install.packages("qrcode")
 library(qrcode)
 
+# Maize genetics website link
 png("maize_genetics_MKB.png")
-qrcode_gen("https://www.maizegenetics.net/merrittkhaipho-burch")
+qr_code("https://www.maizegenetics.net/merrittkhaipho-burch")
 dev.off()
 
 # rick roll
 png("~/Downloads/rick.png")
 qr_code("https://youtu.be/dQw4w9WgXcQ")
+dev.off()
+
+# Google scholar profile
+png("~/Box Sync/Cornell_PhD/labProjects/presentations/2022_PEQG/google_scholar_mbkb.png")
+qr <- qrcode::qr_code("https://scholar.google.com/citations?user=lvFMbpwAAAAJ&hl=en")
+plot(qr)
 dev.off()
