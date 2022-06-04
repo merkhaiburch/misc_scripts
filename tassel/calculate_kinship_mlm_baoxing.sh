@@ -102,3 +102,20 @@ bgzip --threads 87 /workdir/mbb262/nam/subset_nam_combined_all_chroms.vcf
   -export /mlm_nam_kinship_results
 
 
+# Calculate PCs on a vcf file
+
+# Filter vcf file
+/home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl \
+  -debug /debug_pca_vcf_nam_subset.log \
+  -Xmx1020g \
+  -maxThreads 87 \
+  -fork1 -importGuess /subset_nam_combined_all_chroms.vcf.gz -noDepth \
+  -FilterSiteBuilderPlugin \
+  -siteMinAlleleFreq 0.01 \
+  -siteMaxAlleleFreq 0.99 \
+  -removeSitesWithIndels true \
+  -endPlugin \
+  -PrincipalComponentsPlugin \
+  -covariance true \
+  -endPlugin \
+  -export /pc_output
