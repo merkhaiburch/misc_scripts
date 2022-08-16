@@ -6,19 +6,23 @@
 
 # Description:
 # Run a mixed model in rTASSEL
-# phenotype ~ SNP + Kinship
+# phenotype ~ numeric genotype PAV + Kinship
+# 
+# Run GLM
+# phenotype ~ numeric genotype PAV
+#
+# rtassel wiki
+# https://maize-genetics.github.io/rTASSEL/articles/rtassel_walkthrough.html
 # ---------------------------------------------------------------
 
 
 # Setting memory
-options(java.parameters = c("-Xmx120g"))
+options(java.parameters = c("-Xmx30g"))
 numThreads <- 5
 p_value <- 0.01
 
 # Load package
 library(rTASSEL)
-library(dplyr)
-library(ggplot2)
 
 # Start logging
 rTASSEL::startLogger(fullPath = NULL, fileName = NULL)
@@ -29,18 +33,20 @@ rTASSEL::startLogger(fullPath = NULL, fileName = NULL)
 # ------------------------------------------------
 
 # Load in a numeric genotype table
-numericpath <- "~/Desktop/TutorialData/numeric_geno.txt"
-genotype <-  rTASSEL::readGenotypeTableFromPath(path = numericpath, keepDepth = FALSE)
+genotype <-  rTASSEL::readGenotypeTableFromPath(path = "/workdir/mbb262/mdp_genotype_with_Probability.txt")
 
 # Load in phenotype file
-phenotype <- data.table::fread("/workdir/mbb262/Mann_GWA/Pheno-Absolute-log10.csv", nThread = numThreads, drop = c(1))
-colnames(phenotype) <- c("Taxa", "pheno")
+phenotype <- data.table::fread("/workdir/mbb262/blued_phenotypes.txt")
+phenotype <- phenotype[,c(1:2)] # kust keep taxa names and 1 phenotype
 
 # Tasselize phenotype
 tasPhenoDF <- rTASSEL::readPhenotypeFromDataFrame(
   phenotypeDF = phenotype,
   taxaID = "Taxa",
   attributeTypes = c("data"))
+
+# Read in kinship matrix
+tasKin <- readTasselDistanceMatrix("/workdir/mbb262/mdp_kinship.txt")
 
 
 # ----------------------------------------------------------------------------------------------
@@ -52,29 +58,29 @@ tasPhenoDF <- rTASSEL::readPhenotypeFromDataFrame(
 tasPhenoDF <- rTASSEL::readGenotypePhenotype(
   genoPathOrObj = genotype,
   phenoPathDFOrObj = tasPhenoDF)
+print(tasPhenoDF)
 
-# Do a light MAF filter to remove invariant sites
-# tasGenoPhenoFilt <- rTASSEL::filterGenotypeTableSites(
-#   tasObj = tasPhenoDF,
-#   siteRangeFilterType = "none",
-#   siteMinAlleleFreq = 0.01,
-#   siteMaxAlleleFreq = 1.0,
-#   siteMinCount = 13)
-print(tasGenoPhenoFilt)
-
-# Calculate kinship matrix
-tasKin <- kinshipMatrix(tasObj = tasGenoPhenoFilt)
-
-# Run fast association, write files to disk.
+# Run MLM, write files to disk.
 rTASSEL::assocModelFitter(
-  tasObj = tasGenoPhenoFilt,
-  formula = pheno ~ .,
+  tasObj = tasPhenoDF,
+  formula = EarDia ~ .,
   fitMarkers = TRUE,
   kinship = tasKin,
-  fastAssociation = TRUE,
+  fastAssociation = FALSE,
   maxP = p_value,
   maxThreads = numThreads,
-  outputFile = "/workdir/mbb262/fast_assoc_results_model_5.txt")
+  outputFile = "/workdir/mbb262/model_results.txt")
+
 
 # Load in association results
-gwas_result_fa_model_5 <- data.table::fread("/workdir/mbb262/fast_assoc_results_model_5.txt")
+gwas_results <- data.table::fread("/workdir/mbb262/model_results.txt")
+
+
+# Calculate GLM, save to r environment
+tasGLM <- rTASSEL::assocModelFitter(
+  tasObj = tasPhenoDF,
+  formula = EarDia ~ .,
+  fitMarkers = TRUE, 
+  kinship = NULL,
+  fastAssociation = FALSE
+)
