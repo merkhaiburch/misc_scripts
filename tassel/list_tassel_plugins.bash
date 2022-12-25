@@ -13,3 +13,6 @@
 
 # On biohpc
 /home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl -ListPlugins
+
+# to get help on a specific one 
+/home/mbb262/bioinformatics/tassel-5-standalone/run_pipeline.pl -CountAssociationsPlugin
