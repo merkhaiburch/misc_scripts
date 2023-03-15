@@ -25,3 +25,9 @@ png("~/Box Sync/Cornell_PhD/labProjects/presentations/2022_PEQG/google_scholar_m
 qr <- qrcode::qr_code("https://scholar.google.com/citations?user=lvFMbpwAAAAJ&hl=en")
 plot(qr)
 dev.off()
+
+# My personal website
+png("~/Downloads/personal_website_mbkb.png")
+qr <- qrcode::qr_code("https://merkhaiburch.github.io/")
+plot(qr)
+dev.off()
