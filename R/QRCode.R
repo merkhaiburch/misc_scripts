@@ -31,3 +31,9 @@ png("~/Downloads/personal_website_mbkb.png")
 qr <- qrcode::qr_code("https://merkhaiburch.github.io/")
 plot(qr)
 dev.off()
+
+# pleiotropy paper
+png("~/Downloads/pleiotropy.png")
+qr <- qrcode::qr_code("https://doi.org/10.1371/journal.pgen.1010664")
+plot(qr)
+dev.off()
