@@ -107,7 +107,7 @@ rm -v -rf /home/mbb262/miniconda
 # For future reference (on cbsu)
 rm -v -rf /home2/mbb262/.conda
 
-# Download miniforge
+# Download miniforge (linux)
 wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
 
 # close out of terminal, reopen.
@@ -124,6 +124,16 @@ conda info
 # https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community
 conda install -n base conda-libmamba-solver
 conda config --set solver libmamba
+
+
+## For Mac
+conda info
+rm -rf /opt/.condarc
+rm -v -rf /opt/miniconda
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-x86_64.sh
+# close out of terminal, reopen.
+# Installed here
+/Users/mbb262-admin/miniforge3
 
 
 
