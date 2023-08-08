@@ -1,0 +1,31 @@
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.io.File
+
+buildAlignmentScript()
+
+fun buildAlignmentScript() {
+        val inputFile = "/workdir/mbb262/nam_inbred_alignments.tsv"
+        val outputScript = "/home/mbb262/git_projects/te_ase_nam/src/expression_03d_inbredMinimap2NAMParentAlignment.sh"
+
+        File(outputScript).bufferedWriter().use { output ->
+            output.write("# Mapping parameters ---------------\n")
+            output.write("N_THREADS=40\n")
+            output.write("PROJ_DIR=/workdir/mbb262/nam_hybrid_rnaseq\n")
+            output.write("ALIGN_OUT=\$PROJ_DIR/output/minimap_alignments/inbred\n")
+            output.write("REF_TRANS=\$PROJ_DIR/references/fa_transcriptomes\n")
+            output.write("FASTQ_TRIM_MERGE_DIR=\$PROJ_DIR/reads/trimmedMerged\n")
+
+
+            output.write("## Run minimap2 ----------------------\n")
+            Files.newBufferedReader(Paths.get(inputFile)).readLines()
+                .filter { !it.startsWith("sample_name") }
+                .map { it.split("\t") }
+                .forEach { row ->
+                    val sample = row[0]
+                    val inbred1 = row[1]
+
+                    output.write("minimap2 -ax sr -t \$N_THREADS \$REF_TRANS/${inbred1} \$FASTQ_TRIM_MERGE_DIR/${sample} > \$ALIGN_OUT/${sample}_minimap2.sam \n")
+                }
+        }
+    }
