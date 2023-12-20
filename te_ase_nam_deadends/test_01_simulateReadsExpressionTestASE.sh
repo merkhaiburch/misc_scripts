@@ -9,8 +9,8 @@ set \
 # Author.... Merritt Khaipho-Burch
 # Contact... mbb262@cornell.edu
 # Date...... 2022-12-12
-# Updated... 2023-06-29
 #
+# Updated... 2023-06-29
 # Description:
 # Simulate B73, Cml247, and Ky21 inbred and hybrid reads to test the expression 
 # alignment pipeline and ASE capabilities
