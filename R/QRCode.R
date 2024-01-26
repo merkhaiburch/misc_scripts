@@ -37,3 +37,12 @@ png("~/Downloads/pleiotropy.png")
 qr <- qrcode::qr_code("https://doi.org/10.1371/journal.pgen.1010664")
 plot(qr)
 dev.off()
+
+# yield paper
+png("~/Downloads/nature_yield.png")
+qr <- qrcode::qr_code("https://www.nature.com/articles/d41586-023-02895-w")
+plot(qr)
+dev.off()
+
+
+
